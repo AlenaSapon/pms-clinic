@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
+<script type="text/javascript" async="" src="https://www.googletagmanager.com/gtag/js?id=G-E5NYXQXSSJ&amp;l=dataLayer&amp;cx=c"></script><script src="chrome-extension://ljdobmomdgdljniojadhoplhkpialdid/page/prompt.js"></script><script src="chrome-extension://ljdobmomdgdljniojadhoplhkpialdid/page/runScript.js"></script><head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="/light.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="canonical" href="https://demo.adminkit.io/pages-orders.html">
+
+    <title>Пациенты | Поликлиника 1</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&amp;display=swap" rel="stylesheet">
+    <link class="js-stylesheet" href="/light.css" rel="stylesheet">
+    <script src="/settings.js"></script>
+    <script src="/app.js"></script>
+    <script src="/datatables.js"></script>
+    <style>
+        body {
+            opacity: 0;
+        }
+    </style>
+    <!-- END SETTINGS -->
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-120946860-10"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-120946860-10', { 'anonymize_ip': true });
+    </script></head>
+
+<body data-theme="colored" data-layout="fluid" data-sidebar-position="left" data-sidebar-layout="default">
+<div class="wrapper">
+    <nav id="sidebar" class="sidebar js-sidebar">
+        <div class="sidebar-content js-simplebar" data-simplebar="init"><div class="simplebar-wrapper" style="margin: 0px;"><div class="simplebar-height-auto-observer-wrapper"><div class="simplebar-height-auto-observer"></div></div><div class="simplebar-mask"><div class="simplebar-offset" style="right: 0px; bottom: 0px;"><div class="simplebar-content-wrapper" tabindex="0" role="region" aria-label="scrollable content" style="height: 100%; overflow: hidden;"><div class="simplebar-content" style="padding: 0px;">
+            <a class="sidebar-brand" href="/">
+					<span class="sidebar-brand-text align-middle">
+						Поликлиника №1
+						<sup></sup>
+					</span>
+                <svg class="sidebar-brand-icon align-middle" width="32px" height="32px" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter" color="#FFFFFF" style="margin-left: -3px">
+                    <path d="M12 4L20 8.00004L12 12L4 8.00004L12 4Z"></path>
+                    <path d="M20 12L12 16L4 12"></path>
+                    <path d="M20 16L12 20L4 16"></path>
+                </svg>
+            </a>
+
+            <div class="sidebar-user">
+                <div class="d-flex justify-content-center">
+
+                    <div class="flex-grow-1 ps-2">
+                        <a class="sidebar-user-title dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                            Елена Сапон
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-start" style="">
+                            <a class="dropdown-item" href="/pages-profile"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user align-middle me-1"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> Profile</a>
+
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="/pages-settings"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-settings align-middle me-1"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg> Settings &amp;
+                                Privacy</a>
+                            <a class="dropdown-item" href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-help-circle align-middle me-1"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg> Help Center</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Log out</a>
+                        </div>
+
+                        <div class="sidebar-user-subtitle">Мед. работник</div>
+                    </div>
+                </div>
+            </div>
+
+            <ul class="sidebar-nav">
+
+                <li class="sidebar-item">
+                    <a data-bs-target="#dashboards" data-bs-toggle="collapse" class="sidebar-link collapsed" aria-expanded="false">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-sliders align-middle"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg> <span class="align-middle">Запись к врачу</span>
+                    </a>
+                    <ul id="dashboards" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar" style="">
+                        <li class="sidebar-item"><a class="sidebar-link" href="/">Терапевт</a></li>
+                        <li class="sidebar-item"><a class="sidebar-link" href="/dashboard-ecommerce">Хирург</a></li>
+                        <li class="sidebar-item"><a class="sidebar-link" href="/dashboard-crypto">Невролог</a></li>
+                    </ul>
+                </li>
+
+                <li class="sidebar-item active">
+                    <a data-bs-target="#pages" data-bs-toggle="collapse" class="sidebar-link collapsed" aria-expanded="false">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-layout align-middle"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg> <span class="align-middle">Пациенты</span>
+                    </a>
+                    <ul id="pages" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar" style="">
+
+
+
+                        <li class="sidebar-item active"><a class="sidebar-link" href="/pages-orders">Пациенты<span class="sidebar-badge badge bg-primary">Pro</span></a></li>
+
+
+
+                    </ul>
+                </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            </ul>
+
+
+        </div></div></div></div><div class="simplebar-placeholder" style="width: auto; height: 730px;"></div></div><div class="simplebar-track simplebar-horizontal" style="visibility: hidden;"><div class="simplebar-scrollbar" style="width: 0px; display: none;"></div></div><div class="simplebar-track simplebar-vertical" style="visibility: hidden;"><div class="simplebar-scrollbar" style="height: 0px; transform: translate3d(0px, 0px, 0px); display: none;"></div></div></div>
+    </nav>
+
+    <div class="main">
+        <nav class="navbar navbar-expand navbar-light navbar-bg">
+            <a class="sidebar-toggle js-sidebar-toggle">
+                <i class="hamburger align-self-center"></i>
+            </a>
+
+            <div class="navbar-collapse collapse">            </div>
+            <a href="#" class="btn btn-primary btn-sm">Добавить пациента</a></nav>
+
+        <main class="content">
+            <div class="container-fluid p-0">
+
+                <div class="mb-3">
+                    <h1 class="h3 d-inline align-middle">Пациенты</h1>
+                </div>
+
+                <div class="card">
+                    <div class="card-header pb-0">
+                        <div class="card-actions float-end">
+                            <div class="dropdown position-relative">
+                                <a href="#" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false" class="">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal align-middle"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-end">
+                                    <a class="dropdown-item" href="#">Action</a>
+                                    <a class="dropdown-item" href="#">Another action</a>
+                                    <a class="dropdown-item" href="#">Something else here</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="card-body">
+                        <div id="datatables-orders_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer"><div class="row"><div class="col-sm-12 col-md-6"><div class="dataTables_length" id="datatables-orders_length"><label>Отображать <select name="datatables-orders_length" aria-controls="datatables-orders" class="form-select form-select-sm"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> записей</label></div></div><div class="col-sm-12 col-md-6"><div id="datatables-orders_filter" class="dataTables_filter"><label>Поиск<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="datatables-orders"></label></div></div></div><div class="row dt-row"><div class="col-sm-12"><table id="datatables-orders" class="table table-responsive table-striped dataTable no-footer dtr-inline collapsed" width="100%" aria-describedby="datatables-orders_info" style="width: 100%;">
+                            <thead>
+                            <tr><th class="sorting" tabindex="0" aria-controls="datatables-orders" rowspan="1" colspan="1" style="width: 54px;" aria-label="#: activate to sort column ascending">Ид. номер</th><th class="sorting sorting_asc" tabindex="0" aria-controls="datatables-orders" rowspan="1" colspan="1" style="width: 61px;" aria-label="Billing Name: activate to sort column descending" aria-sort="ascending">ФИО</th><th class="sorting" tabindex="0" aria-controls="datatables-orders" rowspan="1" colspan="1" style="width: 85px;" aria-label="Date: activate to sort column ascending">Дата рождения</th><th class="sorting" tabindex="0" aria-controls="datatables-orders" rowspan="1" colspan="1" style="width: 28px;" aria-label="Total: activate to sort column ascending">Пол</th><th class="sorting" tabindex="0" aria-controls="datatables-orders" rowspan="1" colspan="1" style="width: 106px;" aria-label="Payment Status: activate to sort column ascending">Адресс проживания</th><th class="sorting" tabindex="0" aria-controls="datatables-orders" rowspan="1" colspan="1" style="width: 116px;" aria-label="Payment Method: activate to sort column ascending">Контактный телефон</th><th class="sorting_disabled dtr-hidden" rowspan="1" colspan="1" style="width: 0px; display: none;" aria-label="Actions">Действия</th></tr>
+                            </thead>
+                            <tbody>
+                            <tr class="odd">
+                                <td class="dtr-control" tabindex="0" style=""><strong>П1-1</strong></td>
+                                <td class="sorting_1">Ольга Ларионова</td>
+                                <td>2023-12-04</td>
+                                <td>Ж</td>
+                                <td><span class="sorting_1">Пр. Рокоссовского 10/1-6</span></td>
+                                <td>+375447894523</td>
+                                <td class="dtr-hidden" style="display: none;">
+                                    <a href="#" class="btn btn-primary btn-sm">Открыть</a>
+                                    <a href="#" class="btn btn-primary btn-sm">Редактировать</a>
+                                </td>
+                            </tr><tr class="even">
+                                <td class="dtr-control" tabindex="0"><strong>П1-2</strong></td>
+                                <td class="sorting_1">Олег Лапин</td>
+                                <td>2022-04-19</td>
+                                <td>М</td>
+                                <td><span class="sorting_1">ул. Неманская, 11-5</span></td>
+                                <td> +375291112233</td>
+                                <td class="dtr-hidden" style="display: none;">
+                                    <a href="#" class="btn btn-primary btn-sm">Открыть</a>
+                                    <a href="#" class="btn btn-primary btn-sm">Редактировать</a>
+                                </td>
+                            </tr></tbody>
+                        </table></div></div><div class="row"><div class="col-sm-12 col-md-5"><div class="dataTables_info" id="datatables-orders_info" role="status" aria-live="polite">Showing 1 to 10 of 15 entries</div></div><div class="col-sm-12 col-md-7"><div class="dataTables_paginate paging_simple_numbers" id="datatables-orders_paginate"><ul class="pagination"><li class="paginate_button page-item previous disabled" id="datatables-orders_previous"><a aria-controls="datatables-orders" aria-disabled="true" aria-role="link" data-dt-idx="previous" tabindex="0" class="page-link">Previous</a></li><li class="paginate_button page-item active"><a href="#" aria-controls="datatables-orders" aria-role="link" aria-current="page" data-dt-idx="0" tabindex="0" class="page-link">1</a></li><li class="paginate_button page-item "><a href="#" aria-controls="datatables-orders" aria-role="link" data-dt-idx="1" tabindex="0" class="page-link">2</a></li><li class="paginate_button page-item next" id="datatables-orders_next"><a href="#" aria-controls="datatables-orders" aria-role="link" data-dt-idx="next" tabindex="0" class="page-link">Next</a></li></ul></div></div></div></div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+        <footer class="footer">
+            <div class="container-fluid">
+                <div class="row text-muted">
+                    <div class="col-6 text-start">
+                        <p class="mb-0">
+                            <a href="https://adminkit.io/" target="_blank" class="text-muted"><strong>AdminKit</strong></a> ©
+                        </p>
+                    </div>
+                    <div class="col-6 text-end">
+                        <ul class="list-inline">
+                            <li class="list-inline-item">
+                                <a class="text-muted" href="#">Support</a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a class="text-muted" href="#">Help Center</a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a class="text-muted" href="#">Privacy</a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a class="text-muted" href="#">Terms</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>
+
+<script src="/js/app.js"></script>
+
+<script src="/js/datatables.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Datatables Orders
+        $("#datatables-orders").DataTable({
+            responsive: true,
+            aoColumnDefs: [{
+                bSortable: false,
+                aTargets: [-1]
+            }]
+        });
+    });
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function(event) {
+        setTimeout(function(){
+            if(localStorage.getItem('popState') !== 'shown'){
+                window.notyf.open({
+                    type: "success",
+                    message: "Get access to all 500+ components and 45+ pages with AdminKit PRO. <u><a class=\"text-white\" href=\"https://adminkit.io/pricing\" target=\"_blank\">More info</a></u> 🚀",
+                    duration: 10000,
+                    ripple: true,
+                    dismissible: false,
+                    position: {
+                        x: "left",
+                        y: "bottom"
+                    }
+                });
+
+                localStorage.setItem('popState','shown');
+            }
+        }, 15000);
+    });
+</script>
+
+<div class="settings js-settings">
+    <div class="settings-toggle js-settings-toggle">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-sliders align-middle"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg>
+    </div>
+
+    <div class="settings-panel">
+        <div class="settings-content">
+            <div class="settings-title d-flex align-items-center">
+                <button type="button" class="btn-close float-right js-settings-toggle" aria-label="Close"></button>
+
+                <h4 class="mb-0 ms-2 d-inline-block">Explore AdminKit <sup><small class="badge bg-primary text-uppercase">Pro</small></sup></h4>
+            </div>
+
+            <div class="settings-body">
+
+                <div class="alert alert-primary" role="alert">
+                    <div class="alert-message">
+                        <strong>Hey there!</strong> Choose the color scheme, sidebar and layout that best fits your project needs.
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <span class="d-block fw-bold">Color scheme</span>
+                    <span class="d-block text-muted mb-2">The perfect color mode for your app.</span>
+                    <div class="row g-0 text-center mx-n1 mb-2">
+                        <div class="col">
+                            <label class="mx-1 d-block mb-1">
+                                <input class="settings-scheme-label" type="radio" name="theme" value="default">
+                                <div class="settings-scheme">
+                                    <div class="settings-scheme-theme settings-scheme-theme-default"></div>
+                                </div>
+                            </label>
+                            Default
+                        </div>
+                        <div class="col">
+                            <label class="mx-1 d-block mb-1">
+                                <input class="settings-scheme-label" type="radio" name="theme" value="colored">
+                                <div class="settings-scheme">
+                                    <div class="settings-scheme-theme settings-scheme-theme-colored"></div>
+                                </div>
+                            </label>
+                            Colored
+                        </div>
+                    </div>
+                    <div class="row g-0 text-center mx-n1">
+                        <div class="col">
+                            <label class="mx-1 d-block mb-1">
+                                <input class="settings-scheme-label" type="radio" name="theme" value="dark">
+                                <div class="settings-scheme">
+                                    <div class="settings-scheme-theme settings-scheme-theme-dark"></div>
+                                </div>
+                            </label>
+                            Dark
+                        </div>
+                        <div class="col">
+                            <label class="mx-1 d-block mb-1">
+                                <input class="settings-scheme-label" type="radio" name="theme" value="light">
+                                <div class="settings-scheme">
+                                    <div class="settings-scheme-theme settings-scheme-theme-light"></div>
+                                </div>
+                            </label>
+                            Light
+                        </div>
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="mb-3">
+                    <span class="d-block fw-bold">Sidebar layout</span>
+                    <span class="d-block text-muted mb-2">Change the layout of the sidebar.</span>
+                    <div>
+                        <label>
+                            <input class="settings-button-label" type="radio" name="sidebarLayout" value="default">
+                            <div class="settings-button">
+                                Default
+                            </div>
+                        </label>
+                        <label>
+                            <input class="settings-button-label" type="radio" name="sidebarLayout" value="compact">
+                            <div class="settings-button">
+                                Compact
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="mb-3">
+                    <span class="d-block fw-bold">Sidebar position</span>
+                    <span class="d-block text-muted mb-2">Toggle the position of the sidebar.</span>
+                    <div>
+                        <label>
+                            <input class="settings-button-label" type="radio" name="sidebarPosition" value="left">
+                            <div class="settings-button">
+                                Left
+                            </div>
+                        </label>
+                        <label>
+                            <input class="settings-button-label" type="radio" name="sidebarPosition" value="right">
+                            <div class="settings-button">
+                                Right
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="mb-3">
+                    <span class="d-block fw-bold">Layout</span>
+                    <span class="d-block text-muted mb-2">Toggle container layout system.</span>
+                    <div>
+                        <label>
+                            <input class="settings-button-label" type="radio" name="layout" value="fluid">
+                            <div class="settings-button">
+                                Fluid
+                            </div>
+                        </label>
+                        <label>
+                            <input class="settings-button-label" type="radio" name="layout" value="boxed">
+                            <div class="settings-button">
+                                Boxed
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="settings-footer">
+                <div class="d-grid">
+                    <a class="btn btn-primary btn-lg btn-block" href="https://adminkit.io/pricing/" target="_blank">Get AdminKit PRO</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div><div class="notyf"></div><div class="notyf-announcer" aria-atomic="true" aria-live="polite" style="border: 0px; clip: rect(0px, 0px, 0px, 0px); height: 1px; margin: -1px; overflow: hidden; padding: 0px; position: absolute; width: 1px; outline: 0px;"></div><svg id="SvgjsSvg1001" width="2" height="0" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev" style="overflow: hidden; top: -100%; left: -100%; position: absolute; opacity: 0;"><defs id="SvgjsDefs1002"></defs><polyline id="SvgjsPolyline1003" points="0,0"></polyline><path id="SvgjsPath1004" d="M0 0 "></path></svg></body></html>
