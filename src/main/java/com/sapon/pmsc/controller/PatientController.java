@@ -3,6 +3,7 @@ package com.sapon.pmsc.controller;
 import com.sapon.pmsc.model.Patient;
 import com.sapon.pmsc.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -21,6 +22,12 @@ public class PatientController {
     @GetMapping
     public List<Patient> getPatients() {
         return patientService.getPatients();
+    }
+
+    @GetMapping("/{patientId}")
+    public ResponseEntity<Patient> findPatientById(@PathVariable Long patientId) {
+        Patient patient = patientService.findPatientById(patientId);
+        return ResponseEntity.ok(patient);
     }
 
     @PostMapping

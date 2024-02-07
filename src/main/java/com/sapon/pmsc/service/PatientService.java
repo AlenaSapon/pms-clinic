@@ -1,5 +1,6 @@
 package com.sapon.pmsc.service;
 
+import com.sapon.pmsc.model.Allergy;
 import com.sapon.pmsc.model.Patient;
 import com.sapon.pmsc.repository.PatientRepository;
 import jakarta.transaction.Transactional;
@@ -72,13 +73,13 @@ public class PatientService {
                         "patient with id " + patientId + " doesn't exist"));
 
         if (firstName != null &&
-                firstName.length() > 0 &&
+                !firstName.isEmpty() &&
                 !Objects.equals(patient.getFirstName(), firstName)) {
             patient.setFirstName(firstName);
         }
 
         if (email != null &&
-                email.length() > 0 &&
+                !email.isEmpty() &&
                 !Objects.equals(patient.getEmail(), email)) {
             Optional<Patient> patientOptional = patientRepository
                     .findPatientByEmail(email);
@@ -96,50 +97,66 @@ public class PatientService {
             if (patientOptional.isPresent()) {
                 throw new IllegalStateException("PID is already taken");
             }
-            patient.setPid(pid);}
+            patient.setPid(pid);
+        }
 
         if (lastName != null &&
                 !lastName.isEmpty() &&
                 !Objects.equals(patient.getLastName(), lastName)) {
-        patient.setLastName(lastName);}
+            patient.setLastName(lastName);
+        }
 
         if (dob != null &&
                 !dob.toString().isEmpty() &&
                 !Objects.equals(patient.getLastName(), lastName)) {
-        patient.setDob(dob);}
+            patient.setDob(dob);
+        }
 
         if (gender != null &&
                 !gender.isEmpty() &&
                 !Objects.equals(patient.getGender(), gender)) {
-        patient.setGender(gender);}
+            patient.setGender(gender);
+        }
 
         if (phone != null &&
                 !phone.isEmpty() &&
                 !Objects.equals(patient.getPhone(), phone)) {
-        patient.setPhone(phone);}
+            patient.setPhone(phone);
+        }
 
         if (address != null &&
                 !address.isEmpty() &&
                 !Objects.equals(patient.getAddress(), address)) {
-        patient.setAddress(address);}
+            patient.setAddress(address);
+        }
 
         if (city != null &&
                 !city.isEmpty() &&
                 !Objects.equals(patient.getCity(), city)) {
-        patient.setCity(city);}
+            patient.setCity(city);
+        }
 
         if (state != null &&
                 !state.isEmpty() &&
                 !Objects.equals(patient.getState(), state)) {
-        patient.setState(state);}
+            patient.setState(state);
+        }
 
         if (zipcode != null &&
                 !zipcode.isEmpty() &&
                 !Objects.equals(patient.getZipcode(), zipcode)) {
-        patient.setZipcode(zipcode);}
+            patient.setZipcode(zipcode);
+        }
 
         if (!Objects.equals(patient.getConsern(), consern)) {
-        patient.setConsern(consern);
+            patient.setConsern(consern);
+        }
     }
+
+    public Patient findPatientById(final Long id) {
+        return patientRepository.findById(id).orElseThrow(() ->
+                new IllegalStateException("patient with this id" + id + " isn't found"));
     }
+
+
 }
