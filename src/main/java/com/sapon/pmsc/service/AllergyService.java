@@ -26,9 +26,10 @@ public class AllergyService {
         return allergyRepository.findAll();
     }
 
-    public void addNewAllergy(Allergy allergy, Long patientId) {
-        allergyRepository.save(allergy);
+    public void addAllergyToPatient(Long allergyId, Long patientId) {
+        Allergy allergy = findAllergyById(allergyId);
         allergy.setPatient(patientService.findPatientById(patientId));
+        allergyRepository.save(allergy);
     }
 
     public void deleteAllergy(Long allergyId) {
@@ -65,4 +66,4 @@ public class AllergyService {
             allergy.setReaction(reaction);
         }
     }
-    }
+}

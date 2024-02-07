@@ -18,10 +18,10 @@ import java.util.Set;
 @ToString
 @Entity
 @Table(
-        name="patient",
-        uniqueConstraints ={
-                @UniqueConstraint(name ="patient_pid_unique", columnNames = "pid"),
-                @UniqueConstraint(name ="patient_email_unique", columnNames = "email"),
+        name = "patient",
+        uniqueConstraints = {
+                @UniqueConstraint(name = "patient_pid_unique", columnNames = "pid"),
+                @UniqueConstraint(name = "patient_email_unique", columnNames = "email"),
         }
 )
 @AllArgsConstructor
@@ -126,8 +126,8 @@ public class Patient {
         this.consern = consern;
     }
 
-    public Integer getAge(){
+    public Integer getAge() {
         return Period.between(dob, LocalDate.now()).getYears();
-}
+    }
 
 }

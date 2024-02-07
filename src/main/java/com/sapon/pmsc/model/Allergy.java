@@ -1,7 +1,10 @@
 package com.sapon.pmsc.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Getter
 @Setter
@@ -25,8 +28,10 @@ public class Allergy {
     private String title;
     private String reaction;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "patient_id")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "patient_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
     private Patient patient;
 
     public Allergy(String title, String reaction, Patient patient) {
