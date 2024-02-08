@@ -1,20 +1,22 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
-<script type="text/javascript" async=""
-        src="https://www.googletagmanager.com/gtag/js?id=G-E5NYXQXSSJ&amp;l=dataLayer&amp;cx=c"></script>
-<script src="chrome-extension://ljdobmomdgdljniojadhoplhkpialdid/page/prompt.js"></script>
-<script src="chrome-extension://ljdobmomdgdljniojadhoplhkpialdid/page/runScript.js"></script>
 <head>
+    <script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
+    <script type="text/javascript" async=""
+            src="https://www.googletagmanager.com/gtag/js?id=G-E5NYXQXSSJ&amp;l=dataLayer&amp;cx=c"></script>
+    <script src="chrome-extension://ljdobmomdgdljniojadhoplhkpialdid/page/prompt.js"></script>
+    <script src="chrome-extension://ljdobmomdgdljniojadhoplhkpialdid/page/runScript.js"></script>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="/light.css" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link rel="canonical" href="https://demo.adminkit.io/pages-orders.html">
-
+    <meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
+    <meta name="author" content="AdminKit">
+    <meta name="keywords"
+          content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
     <title>Пациенты | Поликлиника 1</title>
-
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="/light.css" rel="stylesheet">
+    <link rel="canonical" href="https://demo.adminkit.io/pages-orders.html">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&amp;display=swap" rel="stylesheet">
     <link class="js-stylesheet" href="/light.css" rel="stylesheet">
     <script src="/settings.js"></script>
@@ -25,7 +27,6 @@
             opacity: 0;
         }
     </style>
-    <!-- END SETTINGS -->
     <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-120946860-10"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -39,7 +40,6 @@
         gtag('config', 'UA-120946860-10', {'anonymize_ip': true});
     </script>
 </head>
-
 <body data-theme="colored" data-layout="fluid" data-sidebar-position="left" data-sidebar-layout="default">
 <div class="wrapper">
     <nav id="sidebar" class="sidebar js-sidebar">
@@ -120,37 +120,7 @@
                                 <ul class="sidebar-nav">
 
                                     <li class="sidebar-item">
-                                        <a data-bs-target="#dashboards" data-bs-toggle="collapse"
-                                           class="sidebar-link collapsed" aria-expanded="false">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                                 stroke-linecap="round" stroke-linejoin="round"
-                                                 class="feather feather-sliders align-middle">
-                                                <line x1="4" y1="21" x2="4" y2="14"></line>
-                                                <line x1="4" y1="10" x2="4" y2="3"></line>
-                                                <line x1="12" y1="21" x2="12" y2="12"></line>
-                                                <line x1="12" y1="8" x2="12" y2="3"></line>
-                                                <line x1="20" y1="21" x2="20" y2="16"></line>
-                                                <line x1="20" y1="12" x2="20" y2="3"></line>
-                                                <line x1="1" y1="14" x2="7" y2="14"></line>
-                                                <line x1="9" y1="8" x2="15" y2="8"></line>
-                                                <line x1="17" y1="16" x2="23" y2="16"></line>
-                                            </svg>
-                                            <span class="align-middle">Запись к врачу</span>
-                                        </a>
-                                        <ul id="dashboards" class="sidebar-dropdown list-unstyled collapse"
-                                            data-bs-parent="#sidebar" style="">
-                                            <li class="sidebar-item"><a class="sidebar-link" href="/">Терапевт</a></li>
-                                            <li class="sidebar-item"><a class="sidebar-link"
-                                                                        href="/dashboard-ecommerce">Хирург</a></li>
-                                            <li class="sidebar-item"><a class="sidebar-link" href="/dashboard-crypto">Невролог</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-
-                                    <li class="sidebar-item active">
-                                        <a data-bs-target="#pages" data-bs-toggle="collapse"
-                                           class="sidebar-link collapsed" aria-expanded="false">
+                                        <a data-bs-target="#pages" class="sidebar-link" aria-expanded="true">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                                  stroke-linecap="round" stroke-linejoin="round"
@@ -159,142 +129,144 @@
                                                 <line x1="3" y1="9" x2="21" y2="9"></line>
                                                 <line x1="9" y1="21" x2="9" y2="9"></line>
                                             </svg>
-                                            <span class="align-middle">Пациенты</span>
+                                            <span class="align-middle">Вернуться к списку</span>
                                         </a>
-                                        <ul id="pages" class="sidebar-dropdown list-unstyled collapse"
+                                        <ul id="pages" class="sidebar-dropdown list-unstyled collapse show"
                                             data-bs-parent="#sidebar" style="">
-
-
-                                            <li class="sidebar-item active"><a class="sidebar-link"
-                                                                               href="/pages-orders">Пациенты<span
-                                                    class="sidebar-badge badge bg-primary">Pro</span></a></li>
-
-
+                                            <li class="sidebar-item active"></li>
                                         </ul>
                                     </li>
-
-
+                                    <li class="sidebar-item active">
+                                        <a data-bs-target="#pages" data-bs-toggle="collapse" class="sidebar-link"
+                                           aria-expanded="true">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                 stroke-linecap="round" stroke-linejoin="round"
+                                                 class="feather feather-layout align-middle">
+                                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                                <line x1="3" y1="9" x2="21" y2="9"></line>
+                                                <line x1="9" y1="21" x2="9" y2="9"></line>
+                                            </svg>
+                                            <span class="align-middle">Пациент</span>
+                                        </a>
+                                        <ul id="patient" class="sidebar-dropdown list-unstyled collapse show"
+                                            data-bs-parent="#sidebar" style="">
+                                            <li class="sidebar-item active"><a class="sidebar-link"
+                                                                               href="/pages-orders">Данные
+                                                пациента</a><a class="sidebar-link" href="/pages-orders">Аллергии</a><a
+                                                    class="sidebar-link" href="/pages-orders">История посещений</a></li>
+                                        </ul>
+                                    </li>
                                 </ul>
-
-
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="simplebar-placeholder" style="width: auto; height: 730px;"></div>
+                <div class="simplebar-placeholder" style="width: auto; height: 730px;">
+
+                </div>
             </div>
             <div class="simplebar-track simplebar-horizontal" style="visibility: hidden;">
                 <div class="simplebar-scrollbar" style="width: 0px; display: none;"></div>
             </div>
             <div class="simplebar-track simplebar-vertical" style="visibility: hidden;">
                 <div class="simplebar-scrollbar"
-                     style="height: 0px; transform: translate3d(0px, 0px, 0px); display: none;"></div>
+                     style="height: 0px; transform: translate3d(0px, 0px, 0px); display: none;">
+                </div>
             </div>
         </div>
     </nav>
+
     <div class="main">
         <nav class="navbar navbar-expand navbar-light navbar-bg">
             <a class="sidebar-toggle js-sidebar-toggle">
                 <i class="hamburger align-self-center"></i>
             </a>
-
             <div class="navbar-collapse collapse"></div>
-            <a href="#" class="btn btn-primary btn-sm">Добавить пациента</a></nav>
-
+        </nav>
         <main class="content">
-            <div class="container-fluid p-0">
-                <div class="mb-3">
-                    <h1 class="h3 d-inline align-middle">Пациенты</h1>
-                </div>
-
+            <div class="">
                 <div class="card">
-                    <div class="card-header pb-0">
-                        <div class="card-actions float-end">
-                            <div class="dropdown position-relative">
-                                <a href="#" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false"
-                                   class="">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                         stroke-linejoin="round" class="feather feather-more-horizontal align-middle">
-                                        <circle cx="12" cy="12" r="1"></circle>
-                                        <circle cx="19" cy="12" r="1"></circle>
-                                        <circle cx="5" cy="12" r="1"></circle>
-                                    </svg>
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-end">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <a class="dropdown-item" href="#">Something else here</a>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="card-header">
+                        <h5 class="card-title">Редактирование данных пациента</h5>
 
                     </div>
                     <div class="card-body">
-                        <div id="datatables-orders_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
+                        <form>
+                            <div class="row">
+                                <div class="mb-3 col-md-4">
+                                    <label class="form-label" for="inputCity">Фамилия</label>
+                                    <input type="text" class="form-control" id="lastName">
+                                </div>
 
-                            <div class="row dt-row">
-                                <div class="col-sm-12">
-                                    <table id="datatables-orders"
-                                           class="table table-responsive table-striped dataTable no-footer dtr-inline collapsed"
-                                           width="100%" aria-describedby="datatables-orders_info" style="width: 100%;">
-                                        <thead>
-                                        <tr>
-                                            <th class="sorting" tabindex="0" aria-controls="datatables-orders"
-                                                rowspan="1" colspan="1" style="width: 54px;"
-                                                aria-label="#: activate to sort column ascending">Ид. номер
-                                            </th>
-                                            <th class="sorting sorting_asc" tabindex="0"
-                                                aria-controls="datatables-orders" rowspan="1" colspan="1"
-                                                style="width: 61px;"
-                                                aria-label="Billing Name: activate to sort column descending"
-                                                aria-sort="ascending">ФИО
-                                            </th>
-                                            <th class="sorting" tabindex="0" aria-controls="datatables-orders"
-                                                rowspan="1" colspan="1" style="width: 85px;"
-                                                aria-label="Date: activate to sort column ascending">Дата рождения
-                                            </th>
-                                            <th class="sorting" tabindex="0" aria-controls="datatables-orders"
-                                                rowspan="1" colspan="1" style="width: 28px;"
-                                                aria-label="Total: activate to sort column ascending">Пол
-                                            </th>
-                                            <th class="sorting" tabindex="0" aria-controls="datatables-orders"
-                                                rowspan="1" colspan="1" style="width: 106px;"
-                                                aria-label="Payment Status: activate to sort column ascending">Адресс
-                                                проживания
-                                            </th>
-                                            <th class="sorting" tabindex="0" aria-controls="datatables-orders"
-                                                rowspan="1" colspan="1" style="width: 116px;"
-                                                aria-label="Payment Method: activate to sort column ascending">
-                                                Контактный телефон
-                                            </th>
-                                            <th class="sorting_disabled dtr-hidden" rowspan="1" colspan="1"
-                                                style="width: 0px; display: none;" aria-label="Actions">Действия
-                                            </th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr th:each="patient: ${patients}" class="odd">
-                                            <td th:text="${patient.pid}" class="dtr-control" tabindex="0" style="">
-                                                <strong></strong></td>
-                                            <td th:text="${patient.lastName+ ' ' + patient.firstName}"  class="sorting_1"></td>
-                                            <td th:text="${patient.dob}"></td>
-                                            <td th:text="${patient.gender}"></td>
-                                            <td th:text="${patient.address}"><span class="sorting_1"></span></td>
-                                            <td th:text="${patient.phone}"></td>
-                                            <td class="dtr-hidden" style="display: none;">
-                                                 <a th:href="@{/api/v1/patients/{id}(id=${patient.id})}" class="btn btn-primary btn-sm">Редактировать</a>
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
+                                <div class="mb-3 col-md-4">
+                                    <label class="form-label" for="inputZip">Имя</label>
+                                    <input type="text" class="form-control" id="firstName">
+                                </div>
+                                <div class="mb-3 col-md-4">
+                                    <label class="form-label" for="inputCity">Отчество</label>
+                                    <input type="text" class="form-control" id="surName">
                                 </div>
                             </div>
-                        </div>
+
+                            <div class="row">
+                                <label class="col-form-label col-sm-2 text-sm-end pt-sm-0">Пол</label>
+                                <div class="col-sm-10">
+                                    <label class="form-check">
+                                        <input name="radio-3" type="radio" class="form-check-input" checked="">
+                                        <span class="form-check-label">М</span>
+                                    </label>
+                                    <label class="form-check">
+                                        <input name="radio-3" type="radio" class="form-check-input">
+                                        <span class="form-check-label">Ж</span>
+                                    </label>
+
+                                    <label class="form-check">
+                                        <input name="radio-3" type="radio" class="form-check-input">
+                                        <span class="form-check-label">Другое</span>
+                                    </label></div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label" for="inputAddress">Улица, дом, квартира</label>
+                                <input type="text" class="form-control" id="inputAddress" placeholder="адрес">
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label" for="inputCity">Город</label>
+                                    <input type="text" class="form-control" id="inputCity">
+                                </div>
+                                <div class="mb-3 col-md-4">
+                                    <label class="form-label" for="inputState">Область</label>
+                                    <select id="inputState" class="form-control">
+                                        <option selected="">Минская</option>
+                                        <option>Гродненская</option>
+                                        <option>Гомельская</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3 col-md-2">
+                                    <label class="form-label" for="inputZip">Почтовый код</label>
+                                    <input type="text" class="form-control" id="inputZip">
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Email address</label>
+                                <input type="email" class="form-control" placeholder="Email">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">File input</label>
+                                <input class="form-control" type="file">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-check m-0">
+                                    <input type="checkbox" class="form-check-input">
+                                    <span class="form-check-label">Согласен на обработку персональных данных</span>
+                                </label>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Сохранить</button>
+                        </form>
                     </div>
                 </div>
-
             </div>
         </main>
 
@@ -328,10 +300,6 @@
         </footer>
     </div>
 </div>
-
-<script src="/js/app.js"></script>
-
-<script src="/js/datatables.js"></script>
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {

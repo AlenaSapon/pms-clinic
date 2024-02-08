@@ -12,21 +12,21 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class LoginController {
 
     //get login form page
-    @RequestMapping(value="/login", method = RequestMethod.GET)
-    public String getLoginForm(){
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String getLoginForm() {
         //return html
-    return "login";
+        return "login";
     }
 
     //checking for login credentials
-    @RequestMapping(value="/login", method = RequestMethod.POST)
-    public String login(@ModelAttribute(name="loginForm")LoginForm loginForm, Model model){
-    String username = loginForm.getUsername();
-    String password = loginForm.getPassword();
-    if("admin".equals(username)&&"admin".equals(password)){
-        return "patients";
-    } else
-    model.addAttribute("invalidCredentials", true);
-    return "login";
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public String login(@ModelAttribute(name = "loginForm") LoginForm loginForm, Model model) {
+        String username = loginForm.getUsername();
+        String password = loginForm.getPassword();
+        if ("admin".equals(username) && "admin".equals(password)) {
+            return "redirect:api/v1/patients";
+        } else
+            model.addAttribute("invalidCredentials", true);
+        return "login";
     }
 }

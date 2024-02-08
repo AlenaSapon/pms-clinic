@@ -9,6 +9,4 @@ import java.util.List;
 public interface AllergyRepository extends JpaRepository<Allergy, Long> {
     List<Allergy> findByPatientId(Long patientId);
 
-    @Transactional
-    void deleteByPatientId(Long patientId);
 }

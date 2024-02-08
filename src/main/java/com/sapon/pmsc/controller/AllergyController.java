@@ -22,14 +22,11 @@ public class AllergyController {
 
     private final AllergyRepository allergyRepository;
 
-    private final PatientService patientService;
-
     private final PatientRepository patientRepository;
 
-    public AllergyController(AllergyService allergyService, AllergyRepository allergyRepository, PatientService patientService, PatientRepository patientRepository) {
+    public AllergyController(AllergyService allergyService, AllergyRepository allergyRepository, PatientRepository patientRepository) {
         this.allergyService = allergyService;
         this.allergyRepository = allergyRepository;
-        this.patientService = patientService;
         this.patientRepository = patientRepository;
     }
 

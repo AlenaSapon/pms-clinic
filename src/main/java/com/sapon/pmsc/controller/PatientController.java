@@ -4,7 +4,9 @@ import com.sapon.pmsc.model.Patient;
 import com.sapon.pmsc.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -20,9 +22,23 @@ public class PatientController {
     }
 
     @GetMapping
-    public List<Patient> getPatients() {
-        return patientService.getPatients();
+    public ModelAndView getPatients(){
+        ModelAndView mav = new ModelAndView("patients");
+        mav.addObject("patients", patientService.getPatients());
+        return mav;
     }
+
+//    public List<Patient> getPatients(Model model) {
+//        List<Patient> patients = patientService.getPatients();
+//                model.addAttribute("patients", patients);
+//       return patientService.getPatients();
+//    }
+
+//    public ResponseEntity<List<Patient>> findAllPatients(Model model) {
+//        List<Patient> patients = patientService.getPatients();
+//        model.addAttribute("patients", patients);
+//        return ResponseEntity.ok(patients);
+//    }
 
     @GetMapping("/{patientId}")
     public ResponseEntity<Patient> findPatientById(@PathVariable Long patientId) {
