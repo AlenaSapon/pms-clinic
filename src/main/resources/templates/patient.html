@@ -224,25 +224,25 @@
                             <div class="row">
                                 <div class="mb-3 col-md-4">
                                     <label class="form-label">Date
-                                        <input class="form-control" data-inputmask-alias="datetime"
-                                               data-inputmask-inputformat="dd/mm/yyyy"
+                                        <input class="form-control" th:dates="${patient.dob}" data-inputmask-alias="datetime"
+                                               data-inputmask-inputformat="DD/MM/YYYY"
                                                inputmode="numeric" type="date">
-                                        <span class="text-muted">e.g "DD/MM/YYYY"</span>
+                                        <span class="text-muted">e.g "mm/dd/YYYY"</span>
                                     </label>
                                 </div>
                                 <label class="col-form-label col-sm-2 text-sm-end pt-sm-0">Пол</label>
                                 <div class="mb-3 col-md-4">
                                     <label class="form-check">
-                                        <input name="gender" type="radio" class="form-check-input" value="M" th:radiogroup="${patient.gender}">
+                                        <input name="gender" type="radio" class="form-check-input" value="M" th:checked="${patient.gender}">
                                         <span class="form-check-label">М</span>
                                     </label>
                                     <label class="form-check">
-                                        <input name="gender" type="radio" class="form-check-input" value="F" th:radiogroup="${patient.gender}">
+                                        <input name="gender" type="radio" class="form-check-input" value="F">
                                         <span class="form-check-label">Ж</span>
                                     </label>
 
                                     <label class="form-check">
-                                        <input name="gender" type="radio" class="form-check-input" value="O" th:radiogroup="${patient.gender}">
+                                        <input name="gender" type="radio" class="form-check-input" value="O">
                                         <span class="form-check-label">Другое</span>
                                     </label></div>
                             </div>
@@ -293,27 +293,31 @@
                                     <button type="submit" class="btn btn-primary" name="send" value="save">Сохранить</button>
                                 </div>
                                 <div align="right" class="mb-3 col-md-6" >
-                                <a th:href="@{/api/v1/patients/delete/{id}(id=${patient.id})}"
-                                   type="button" class="btn btn-danger">Удалить</a>
+                                <a  class="btn btn-danger"
+                                   data-bs-target="#defaultModalDanger"
+                                   data-bs-toggle="modal">
+                                   Удалить</a>
                                 </div>
 
-                                <!--                                <div class="modal fade" id="#deletePatient" tabindex="-1" style="display: none;" aria-hidden="true" >-->
-<!--                                    <div class="modal-dialog" role="document">-->
-<!--                                        <div class="modal-content">-->
-<!--                                            <div class="modal-header">-->
-<!--                                                <h5 class="modal-title">Delete patient</h5>-->
-<!--                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
-<!--                                            </div>-->
-<!--                                            <div class="modal-body m-3">-->
-<!--                                                <p class="mb-0">Do you really want to delete the patient?</p>-->
-<!--                                            </div>-->
-<!--                                            <div class="modal-footer">-->
-<!--                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
-<!--                                                <button type="submit" class="btn btn-danger" name="sent" value="delete" id="yesBtn">Yes, delete</button>-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
+                                <div class="modal fade" id="defaultModalDanger" tabindex="-1" style="display: none;" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Deleting the patient </h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body m-3">
+                                                <p class="mb-0">Please, confirm you action.</p>
+                                                <p>The patient <strong th:text="${patient.lastName} +' ' + ${patient.firstName}">  </strong> will never come back!</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                <a type="button" th:href="@{/api/v1/patients/delete/{id}(id=${patient.id})}"
+                                                   class="btn btn-danger">Yes, delete</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </form>
 

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.context.annotation.Bean;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -52,6 +53,7 @@ public class Patient {
     @Column(name = "gender", nullable = false)
     private String gender;
 
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
     @Column(name = "dob", nullable = false)
     private LocalDate dob;
 
