@@ -2,6 +2,7 @@ package com.sapon.pmsc.controller;
 
 import com.sapon.pmsc.model.Patient;
 import com.sapon.pmsc.service.PatientService;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,8 +46,9 @@ public class PatientController {
 //        return "patients";
 //    }
     @PostMapping()
-    public void addPatient(@ModelAttribute Patient patient) {
+    public  ModelAndView registerNewPatient(@ModelAttribute Patient patient) {
         patientService.addNewPatient(patient);
+        return new ModelAndView("patient");
             }
 //    @PostMapping
 //    public void registerNewPatient(@RequestBody Patient patient) {
@@ -57,11 +60,11 @@ public class PatientController {
 //        patientService.deletePatient(patientId);
 //    }
 
-    @DeleteMapping("/delete/{id}")
-    public ModelAndView deletePatient(@PathVariable("id") Long id) {
+    @GetMapping("/delete/{id}")
+    public void deletePatient(@PathVariable("id") Long id, HttpServletResponse response) throws IOException {
         patientService.deletePatient(id);
-        return new ModelAndView("patients");
-    }
+        response.sendRedirect("/api/v1/patients");
+     }
 
     @PutMapping(path = "{patientId}")
     public void updatePatient(

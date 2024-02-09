@@ -292,15 +292,12 @@
                                 <div class="mb-3 col-md-6">
                                     <button type="submit" class="btn btn-primary" name="send" value="save">Сохранить</button>
                                 </div>
-
                                 <div align="right" class="mb-3 col-md-6" >
-                                     <a th:href="@{'delete/{id}'(id=${patient.id})}" data-bs-target="#deletePatient" type="submit" class="btn btn-danger" data-bs-toggle="modal">
-                                                Удалить пациента
-                                    </a>
+                                <a th:href="@{/api/v1/patients/delete/{id}(id=${patient.id})}"
+                                   type="button" class="btn btn-danger">Удалить</a>
                                 </div>
 
-
-<!--                                <div class="modal fade" id="#deletePatient" tabindex="-1" style="display: none;" aria-hidden="true" >-->
+                                <!--                                <div class="modal fade" id="#deletePatient" tabindex="-1" style="display: none;" aria-hidden="true" >-->
 <!--                                    <div class="modal-dialog" role="document">-->
 <!--                                        <div class="modal-content">-->
 <!--                                            <div class="modal-header">-->
@@ -319,6 +316,7 @@
 <!--                                </div>-->
                             </div>
                         </form>
+
                     </div>
                 </div>
             </div>
