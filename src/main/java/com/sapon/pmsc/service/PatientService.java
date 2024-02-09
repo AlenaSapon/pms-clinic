@@ -1,12 +1,10 @@
 package com.sapon.pmsc.service;
 
-import com.sapon.pmsc.model.Allergy;
 import com.sapon.pmsc.model.Patient;
 import com.sapon.pmsc.repository.PatientRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -27,7 +25,7 @@ public class PatientService {
         return patientRepository.findAll();
     }
 
-    public void addNewPatient(Patient patient) {
+    public Object addNewPatient(Patient patient) {
         Optional<Patient> patientByEmail = patientRepository
                 .findPatientByEmail(patient.getEmail());
 
@@ -43,6 +41,7 @@ public class PatientService {
         }
 
         patientRepository.save(patient);
+        return patient;
     }
 
     public void deletePatient(Long patientId) {

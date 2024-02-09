@@ -7,8 +7,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -22,38 +24,43 @@ public class PatientController {
     }
 
     @GetMapping
-    public ModelAndView getPatients(){
+    public ModelAndView getPatients() {
         ModelAndView mav = new ModelAndView("patients");
         mav.addObject("patients", patientService.getPatients());
         return mav;
     }
 
-//    public List<Patient> getPatients(Model model) {
-//        List<Patient> patients = patientService.getPatients();
-//                model.addAttribute("patients", patients);
-//       return patientService.getPatients();
-//    }
-
-//    public ResponseEntity<List<Patient>> findAllPatients(Model model) {
-//        List<Patient> patients = patientService.getPatients();
-//        model.addAttribute("patients", patients);
-//        return ResponseEntity.ok(patients);
-//    }
-
-    @GetMapping("/{patientId}")
-    public ResponseEntity<Patient> findPatientById(@PathVariable Long patientId) {
-        Patient patient = patientService.findPatientById(patientId);
-        return ResponseEntity.ok(patient);
+    @GetMapping("/{id}")
+    public ModelAndView getPatientById(@PathVariable Long id) {
+        ModelAndView mav = new ModelAndView("patient");
+        mav.addObject("patient", patientService.findPatientById(id));
+        return mav;
     }
 
-    @PostMapping
-    public void registerNewPatient(@RequestBody Patient patient) {
+//    @GetMapping("/patients/new")
+//    public String addPatient(Model model) {
+//        Patient patient = new Patient();
+//        model.addAttribute("patients", patient);
+//        return "patients";
+//    }
+    @PostMapping()
+    public void addPatient(@ModelAttribute Patient patient) {
         patientService.addNewPatient(patient);
-    }
+            }
+//    @PostMapping
+//    public void registerNewPatient(@RequestBody Patient patient) {
+//        patientService.addNewPatient(patient);
+//    }
 
-    @DeleteMapping(path = "{patientId}")
-    public void deletePatient(@PathVariable("patientId") Long patientId) {
-        patientService.deletePatient(patientId);
+//    @DeleteMapping(path = "{patientId}")
+//    public void deletePatient(@PathVariable("patientId") Long patientId) {
+//        patientService.deletePatient(patientId);
+//    }
+
+    @DeleteMapping("/delete/{id}")
+    public ModelAndView deletePatient(@PathVariable("id") Long id) {
+        patientService.deletePatient(id);
+        return new ModelAndView("patients");
     }
 
     @PutMapping(path = "{patientId}")

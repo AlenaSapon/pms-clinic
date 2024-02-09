@@ -28,8 +28,8 @@ public class PatientConfig {
                     "olarionova@gmail.com",
                     "+375447225158",
                     "st. Green 5/1-5",
-                    "Minsk",
-                    "Minskaya",
+                    "Gomel",
+                    "Гомельская",
                     "220002",
                     true
 
@@ -46,7 +46,7 @@ public class PatientConfig {
                     "Minsk",
                     "Minskaya",
                     "220002",
-                    true
+                    false
             );
 
             patientRepository.saveAll(

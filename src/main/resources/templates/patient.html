@@ -109,7 +109,7 @@
                                                     </svg>
                                                     Help Center</a>
                                                 <div class="dropdown-divider"></div>
-                                                <a class="dropdown-item" href="#">Log out</a>
+                                                <a class="dropdown-item" href="/">Log out</a>
                                             </div>
 
                                             <div class="sidebar-user-subtitle">Мед. работник</div>
@@ -120,7 +120,8 @@
                                 <ul class="sidebar-nav">
 
                                     <li class="sidebar-item">
-                                        <a data-bs-target="#pages" class="sidebar-link" aria-expanded="true">
+                                        <a href="http://localhost:8080/api/v1/patients" class="sidebar-link"
+                                           aria-expanded="true">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                                  stroke-linecap="round" stroke-linejoin="round"
@@ -151,10 +152,14 @@
                                         </a>
                                         <ul id="patient" class="sidebar-dropdown list-unstyled collapse show"
                                             data-bs-parent="#sidebar" style="">
-                                            <li class="sidebar-item active"><a class="sidebar-link"
-                                                                               href="/pages-orders">Данные
-                                                пациента</a><a class="sidebar-link" href="/pages-orders">Аллергии</a><a
-                                                    class="sidebar-link" href="/pages-orders">История посещений</a></li>
+                                            <li class="sidebar-item active">
+                                                <a class="sidebar-link"
+                                                   th:href="@{/api/v1/patients/{id}/(id=${patient.id})}">Данные
+                                                    пациента</a>
+                                                <a class="sidebar-link"
+                                                   th:href="@{/api/v1/patients/{id}/allergies(id=${patient.id})}">Аллергии</a>
+                                                <a class="sidebar-link" href="/pages-orders">История посещений</a>
+                                            </li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -192,66 +197,86 @@
 
                     </div>
                     <div class="card-body">
-                        <form>
+                        <form th:href="@{/api/v1/patients/{id}(id=${patient.id})}">
                             <div class="row">
-                                <div class="mb-3 col-md-4">
-                                    <label class="form-label" for="inputCity">Фамилия</label>
-                                    <input type="text" class="form-control" id="lastName">
+                                <div class="mb-4 col-md-3">
+                                    <label class="form-label">PID</label>
+                                    <input type="text" th:field="${patient.pid}" class="form-control" id="pid">
+
+                                </div>
+                                <div class="mb-4 col-md-3">
+                                    <label class="form-label">Фамилия</label>
+                                    <input type="text" th:field="${patient.lastName}" class="form-control"
+                                           id="lastName">
                                 </div>
 
-                                <div class="mb-3 col-md-4">
-                                    <label class="form-label" for="inputZip">Имя</label>
-                                    <input type="text" class="form-control" id="firstName">
+                                <div class="mb-4 col-md-3">
+                                    <label class="form-label">Имя</label>
+                                    <input type="text" th:field="${patient.firstName}" class="form-control"
+                                           id="firstName">
                                 </div>
-                                <div class="mb-3 col-md-4">
-                                    <label class="form-label" for="inputCity">Отчество</label>
+                                <div class="mb-4 col-md-3">
+                                    <label class="form-label">Отчество</label>
                                     <input type="text" class="form-control" id="surName">
                                 </div>
                             </div>
 
                             <div class="row">
+                                <div class="mb-3 col-md-4">
+                                    <label class="form-label">Date
+                                        <input class="form-control" data-inputmask-alias="datetime"
+                                               data-inputmask-inputformat="dd/mm/yyyy"
+                                               inputmode="numeric" type="date">
+                                        <span class="text-muted">e.g "DD/MM/YYYY"</span>
+                                    </label>
+                                </div>
                                 <label class="col-form-label col-sm-2 text-sm-end pt-sm-0">Пол</label>
-                                <div class="col-sm-10">
+                                <div class="mb-3 col-md-4">
                                     <label class="form-check">
-                                        <input name="radio-3" type="radio" class="form-check-input" checked="">
+                                        <input name="gender" type="radio" class="form-check-input" value="M" th:radiogroup="${patient.gender}">
                                         <span class="form-check-label">М</span>
                                     </label>
                                     <label class="form-check">
-                                        <input name="radio-3" type="radio" class="form-check-input">
+                                        <input name="gender" type="radio" class="form-check-input" value="F" th:radiogroup="${patient.gender}">
                                         <span class="form-check-label">Ж</span>
                                     </label>
 
                                     <label class="form-check">
-                                        <input name="radio-3" type="radio" class="form-check-input">
+                                        <input name="gender" type="radio" class="form-check-input" value="O" th:radiogroup="${patient.gender}">
                                         <span class="form-check-label">Другое</span>
                                     </label></div>
                             </div>
 
                             <div class="mb-3">
-                                <label class="form-label" for="inputAddress">Улица, дом, квартира</label>
-                                <input type="text" class="form-control" id="inputAddress" placeholder="адрес">
+                                <label class="form-label">Улица, дом, квартира</label>
+                                <input type="text" th:field="${patient.address}" class="form-control" id="inputAddress"
+                                       placeholder="адрес">
                             </div>
                             <div class="row">
                                 <div class="mb-3 col-md-6">
-                                    <label class="form-label" for="inputCity">Город</label>
-                                    <input type="text" class="form-control" id="inputCity">
+                                    <label class="form-label">Город</label>
+                                    <input type="text" th:field="${patient.city}" class="form-control" id="inputCity">
                                 </div>
                                 <div class="mb-3 col-md-4">
-                                    <label class="form-label" for="inputState">Область</label>
-                                    <select id="inputState" class="form-control">
-                                        <option selected="">Минская</option>
+                                    <label class="form-label">Область</label>
+                                    <select id="inputState" class="form-control" th:selected="${patient.state}">
+                                        <option>Минская</option>
                                         <option>Гродненская</option>
                                         <option>Гомельская</option>
+                                        <option>Брестская</option>
+                                        <option>Витебская</option>
+                                        <option>Могилевская</option>
                                     </select>
                                 </div>
                                 <div class="mb-3 col-md-2">
-                                    <label class="form-label" for="inputZip">Почтовый код</label>
-                                    <input type="text" class="form-control" id="inputZip">
+                                    <label class="form-label">Почтовый код</label>
+                                    <input type="text" th:field="${patient.zipcode}" class="form-control" id="inputZip">
                                 </div>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Email address</label>
-                                <input type="email" class="form-control" placeholder="Email">
+                                <input type="email" th:field="${patient.email}" class="form-control"
+                                       placeholder="Email">
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">File input</label>
@@ -259,11 +284,40 @@
                             </div>
                             <div class="mb-3">
                                 <label class="form-check m-0">
-                                    <input type="checkbox" class="form-check-input">
+                                    <input type="checkbox" class="form-check-input" th:checked="${patient.consern}">
                                     <span class="form-check-label">Согласен на обработку персональных данных</span>
                                 </label>
                             </div>
-                            <button type="submit" class="btn btn-primary">Сохранить</button>
+                            <div class="row">
+                                <div class="mb-3 col-md-6">
+                                    <button type="submit" class="btn btn-primary" name="send" value="save">Сохранить</button>
+                                </div>
+
+                                <div align="right" class="mb-3 col-md-6" >
+                                     <a th:href="@{'delete/{id}'(id=${patient.id})}" data-bs-target="#deletePatient" type="submit" class="btn btn-danger" data-bs-toggle="modal">
+                                                Удалить пациента
+                                    </a>
+                                </div>
+
+
+<!--                                <div class="modal fade" id="#deletePatient" tabindex="-1" style="display: none;" aria-hidden="true" >-->
+<!--                                    <div class="modal-dialog" role="document">-->
+<!--                                        <div class="modal-content">-->
+<!--                                            <div class="modal-header">-->
+<!--                                                <h5 class="modal-title">Delete patient</h5>-->
+<!--                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--                                            </div>-->
+<!--                                            <div class="modal-body m-3">-->
+<!--                                                <p class="mb-0">Do you really want to delete the patient?</p>-->
+<!--                                            </div>-->
+<!--                                            <div class="modal-footer">-->
+<!--                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
+<!--                                                <button type="submit" class="btn btn-danger" name="sent" value="delete" id="yesBtn">Yes, delete</button>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -301,6 +355,8 @@
     </div>
 </div>
 
+
+
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         // Datatables Orders
@@ -334,6 +390,7 @@
         }, 15000);
     });
 </script>
+
 
 <div class="settings js-settings">
     <div class="settings-toggle js-settings-toggle">

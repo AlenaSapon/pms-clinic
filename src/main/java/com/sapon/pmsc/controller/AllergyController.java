@@ -9,6 +9,7 @@ import com.sapon.pmsc.service.PatientService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,7 +17,6 @@ import java.util.Optional;
 @RestController
 @RequestMapping(path = "/api/v1")
 public class AllergyController {
-
 
     private final AllergyService allergyService;
 
@@ -30,13 +30,15 @@ public class AllergyController {
         this.patientRepository = patientRepository;
     }
 
-    @GetMapping("/patients/{patientId}/allergies")
-    public List<Allergy> getAllAllergiesByPatientId(@PathVariable("patientId") Long patientId) {
-        return allergyRepository.findByPatientId(patientId);
+    @GetMapping("/patients/{id}/allergies")
+    public ModelAndView getAllergiesByPatientId(@PathVariable Long id) {
+        ModelAndView mav = new ModelAndView("allergies");
+        mav.addObject("allergies", allergyRepository.findByPatientId(id));
+        return mav;
     }
 
     @GetMapping("/allergies/{allergyId}")
-    public ResponseEntity<Allergy> findPatientById(@PathVariable Long allergyId) {
+    public ResponseEntity<Allergy> findAllergyById(@PathVariable Long allergyId) {
         Allergy allergy = allergyService.findAllergyById(allergyId);
         return ResponseEntity.ok(allergy);
     }
@@ -47,7 +49,8 @@ public class AllergyController {
         Allergy allergy = patientRepository.findById(patientId).map(patient -> {
             allergyRequest.setPatient(patient);
             return allergyRepository.save(allergyRequest);
-        }).orElseThrow(() -> new IllegalStateException("Not found Tutorial with id = " + patientId));;
+        }).orElseThrow(() -> new IllegalStateException("Not found Patient with id = " + patientId));
+        ;
         return new ResponseEntity<>(allergy, HttpStatus.CREATED);
     }
 
@@ -57,6 +60,7 @@ public class AllergyController {
         allergyRepository.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
     @PutMapping(path = "/allergies/{allergyId}")
     public void updateAllergy(
             @PathVariable("allergyId") Long allergyId,

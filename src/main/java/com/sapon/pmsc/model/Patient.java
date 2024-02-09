@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
+@Data
 @Getter
 @Setter
 @ToString
@@ -57,14 +58,19 @@ public class Patient {
     @Transient
     private Integer age;
 
-
+    @Column(name = "email")
     private String email;
-
+    @Column(name = "phone")
     private String phone;
+    @Column(name = "address")
     private String address;
+    @Column(name = "city")
     private String city;
+    @Column(name = "state")
     private String state;
+    @Column(name = "zipcode")
     private String zipcode;
+    @Column(name = "consern")
     private Boolean consern;
 
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "patient")
