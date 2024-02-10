@@ -107,7 +107,7 @@ public class PatientService {
 
         if (dob != null &&
                 !dob.toString().isEmpty() &&
-                !Objects.equals(patient.getLastName(), lastName)) {
+                !Objects.equals(patient.getDob(), dob)) {
             patient.setDob(dob);
         }
 

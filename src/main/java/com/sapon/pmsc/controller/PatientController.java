@@ -54,26 +54,16 @@ public class PatientController {
         response.sendRedirect("/api/v1/patients/" + patient.getId());
     }
 
-//    public ResponseEntity<Void> createPatient(@ModelAttribute("patient") Patient patient) {
-//        patientService.addNewPatient(patient);
-//        return ResponseEntity.ok().build();
-//    }
-
-
-//    @PostMapping
-//    public void registerNewPatient(@RequestBody Patient patient) {
-//        patientService.addNewPatient(patient);
-//    }
-
     @GetMapping("/delete/{id}")
     public void deletePatient(@PathVariable("id") Long id, HttpServletResponse response) throws IOException {
         patientService.deletePatient(id);
         response.sendRedirect("/api/v1/patients");
      }
 
-    @PutMapping(path = "{patientId}")
+    @PutMapping(path = "/edit/{patientId}")
     public void updatePatient(
             @PathVariable("patientId") Long patientId,
+            HttpServletResponse response,
             @RequestParam(required = false) String pid,
             @RequestParam(required = false) String firstName,
             @RequestParam(required = false) String lastName,
@@ -86,7 +76,7 @@ public class PatientController {
             @RequestParam(required = false) String state,
             @RequestParam(required = false) String zipcode,
             @RequestParam(required = false) boolean consern
-    ) {
+    ) throws IOException {
         patientService.updatePatient(patientId,
                 pid,
                 firstName,
@@ -101,5 +91,6 @@ public class PatientController {
                 zipcode,
                 consern
         );
+        response.sendRedirect("/api/v1/patients/" + patientId);
     }
 }

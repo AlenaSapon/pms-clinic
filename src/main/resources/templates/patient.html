@@ -201,7 +201,7 @@
 
                     </div>
                     <div class="card-body">
-                        <form th:href="@{/api/v1/patients/{id}(id=${patient.id})}">
+                        <form th:action="@{/api/v1/patients/edit/{patientId}(patientId=${patient.id})}" th:method="put">
                             <div class="row">
                                 <div class="mb-4 col-md-3">
                                     <label class="form-label">PID</label>
@@ -228,7 +228,7 @@
                             <div class="row">
                                 <div class="mb-3 col-md-4">
                                     <label class="form-label">Дата рождения
-                                        <input class="form-control" th:value="*{{patient.dob}}"
+                                        <input class="form-control" th:field="*{{patient.dob}}"
                                                data-inputmask-alias="datetime"
                                                data-inputmask-inputformat="DD/MM/YYYY"
                                                inputmode="numeric" type="date">
@@ -305,13 +305,13 @@
                             </div>
                             <div class="mb-3">
                                 <label class="form-check m-0">
-                                    <input type="checkbox" class="form-check-input" th:checked="*{patient.consern}">
+                                    <input type="checkbox" class="form-check-input" th:field="*{patient.consern}">
                                     <span class="form-check-label">Согласен на обработку персональных данных</span>
                                 </label>
                             </div>
                             <div class="row">
                                 <div class="mb-3 col-md-6">
-                                    <button type="submit" class="btn btn-primary" name="send" value="save">Сохранить</button>
+                                    <button class="btn btn-primary" name="send" value="save">Сохранить</button>
                                 </div>
                                 <div align="right" class="mb-3 col-md-6" >
                                 <a  class="btn btn-danger"
