@@ -1,81 +1,557 @@
-<div class="modal fade" id="defaultModalPrimary" tabindex="-1" style="display: none;" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <div class="row">
-                    <div >
-                        <h5 class="modal-title">Add Patient</h5>
-                    </div>
-                </div>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body m-3">
-                <form th:action="@{/api/v1/patients}" method="post" th:object="${patient}" >
-                    <div class="mb-3 col-md-5">
-                        <label class="form-label">PID
-                            <input type="text" th:field="*{pid}" class="form-control" id="PIDinModal">
-                        </label>
-                    </div>
-                    <div class="row">
-                        <div class="mb-3 col-md-4">
-                            <label class="form-label">Фамилия</label>
-                            <input type="text" th:field="*{lastName}" class="form-control" id="lastName">
-                        </div>
-                        <div class="mb-3 col-md-4">
-                            <label class="form-label">Имя</label>
-                            <input type="text" th:field="*{firstName}" class="form-control" id="firstName">
-                        </div>
-                        <div class="mb-3 col-md-4">
-                            <label class="form-label">Отчество
-                                <input type="text" class="form-control" id="surName">
-                            </label>
-                        </div>
-                    </div>
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-                    <div class="row">
-                        <div class="mb-3 col-md-4">
-                            <label class="form-label">Date
-                                <input class="form-control" data-inputmask-alias="datetime"
-                                       data-inputmask-inputformat="dd/mm/yyyy"
-                                       inputmode="numeric" type="date" th:field="*{dob}">
-                                <span class="text-muted">e.g "DD/MM/YYYY"</span>
-                            </label>
-                        </div>
-                        <div class="mb-3 col-md-4">
-                            <label class="col-form-label col-sm-2 text-sm-end pt-sm-0">Пол</label>
-                            <div class="col-sm-10">
-                                <label class="form-check">
-                                    <input name="radio-3" type="radio" th:field="*{gender}" class="form-check-input" checked="">
-                                    <span class="form-check-label">М</span>
-                                </label>
-                                <label class="form-check">
-                                    <input name="radio-3" type="radio" class="form-check-input">
-                                    <span class="form-check-label">Ж</span>
-                                </label>
-                                <label class="form-check">
-                                    <input name="radio-3" type="radio" class="form-check-input">
-                                    <span class="form-check-label">Другое</span>
-                                </label>
+<head>
+    <script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
+    <script type="text/javascript" async=""
+            src="https://www.googletagmanager.com/gtag/js?id=G-E5NYXQXSSJ&amp;l=dataLayer&amp;cx=c"></script>
+    <script src="chrome-extension://ljdobmomdgdljniojadhoplhkpialdid/page/prompt.js"></script>
+    <script src="chrome-extension://ljdobmomdgdljniojadhoplhkpialdid/page/runScript.js"></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
+    <meta name="author" content="AdminKit">
+    <meta name="keywords"
+          content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
+    <title>Пациенты | Поликлиника 1</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="/light.css" rel="stylesheet">
+    <link rel="canonical" href="https://demo.adminkit.io/pages-orders.html">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&amp;display=swap" rel="stylesheet">
+    <link class="js-stylesheet" href="/light.css" rel="stylesheet">
+    <script src="/settings.js"></script>
+    <script src="/app.js"></script>
+    <script src="/datatables.js"></script>
+    <script src="jquery-3.7.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <style>
+        body {
+            opacity: 0;
+        }
+    </style>
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-120946860-10"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'UA-120946860-10', {'anonymize_ip': true});
+    </script>
+</head>
+<body data-theme="colored" data-layout="fluid" data-sidebar-position="left" data-sidebar-layout="default">
+<div class="wrapper">
+    <nav id="sidebar" class="sidebar js-sidebar">
+        <div class="sidebar-content js-simplebar" data-simplebar="init">
+            <div class="simplebar-wrapper" style="margin: 0px;">
+                <div class="simplebar-height-auto-observer-wrapper">
+                    <div class="simplebar-height-auto-observer"></div>
+                </div>
+                <div class="simplebar-mask">
+                    <div class="simplebar-offset" style="right: 0px; bottom: 0px;">
+                        <div class="simplebar-content-wrapper" tabindex="0" role="region"
+                             aria-label="scrollable content" style="height: 100%; overflow: hidden;">
+                            <div class="simplebar-content" style="padding: 0px;">
+                                <a class="sidebar-brand" href="/">
+					<span class="sidebar-brand-text align-middle">
+						Поликлиника №1
+						<sup></sup>
+					</span>
+                                    <svg class="sidebar-brand-icon align-middle" width="32px" height="32px"
+                                         viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.5"
+                                         stroke-linecap="square" stroke-linejoin="miter" color="#FFFFFF"
+                                         style="margin-left: -3px">
+                                        <path d="M12 4L20 8.00004L12 12L4 8.00004L12 4Z"></path>
+                                        <path d="M20 12L12 16L4 12"></path>
+                                        <path d="M20 16L12 20L4 16"></path>
+                                    </svg>
+                                </a>
+
+                                <div class="sidebar-user">
+                                    <div class="d-flex justify-content-center">
+
+                                        <div class="flex-grow-1 ps-2">
+                                            <a class="sidebar-user-title dropdown-toggle" href="#"
+                                               data-bs-toggle="dropdown" aria-expanded="false">
+                                                Елена Сапон
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-start" style="">
+                                                <a class="dropdown-item" href="/pages-profile">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                         viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                         class="feather feather-user align-middle me-1">
+                                                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                                        <circle cx="12" cy="7" r="4"></circle>
+                                                    </svg>
+                                                    Profile</a>
+
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item" href="/pages-settings">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                         viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                         class="feather feather-settings align-middle me-1">
+                                                        <circle cx="12" cy="12" r="3"></circle>
+                                                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                                                    </svg>
+                                                    Settings &amp;
+                                                    Privacy</a>
+                                                <a class="dropdown-item" href="#">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                         viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                         class="feather feather-help-circle align-middle me-1">
+                                                        <circle cx="12" cy="12" r="10"></circle>
+                                                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                                                        <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                                                    </svg>
+                                                    Help Center</a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item" href="/">Log out</a>
+                                            </div>
+
+                                            <div class="sidebar-user-subtitle">Мед. работник</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <ul class="sidebar-nav">
+
+                                    <li class="sidebar-item">
+                                        <a href="http://localhost:8080/api/v1/patients" class="sidebar-link"
+                                           aria-expanded="true">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                 stroke-linecap="round" stroke-linejoin="round"
+                                                 class="feather feather-layout align-middle">
+                                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                                <line x1="3" y1="9" x2="21" y2="9"></line>
+                                                <line x1="9" y1="21" x2="9" y2="9"></line>
+                                            </svg>
+                                            <span class="align-middle">Вернуться к списку</span>
+                                        </a>
+                                        <ul id="pages" class="sidebar-dropdown list-unstyled collapse show"
+                                            data-bs-parent="#sidebar" style="">
+                                            <li class="sidebar-item active"></li>
+                                        </ul>
+                                    </li>
+                                    <li class="sidebar-item active">
+                                        <a data-bs-target="#pages" data-bs-toggle="collapse" class="sidebar-link"
+                                           aria-expanded="true">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                 stroke-linecap="round" stroke-linejoin="round"
+                                                 class="feather feather-layout align-middle">
+                                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                                <line x1="3" y1="9" x2="21" y2="9"></line>
+                                                <line x1="9" y1="21" x2="9" y2="9"></line>
+                                            </svg>
+                                            <span class="align-middle"> New Пациент</span>
+                                        </a>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="simplebar-placeholder" style="width: auto; height: 730px;">
 
-                    <div class="mb-3">
-                        <label class="form-label">Email address</label>
-                        <input type="email" th:field="*{email}" class="form-control" placeholder="Email">
+                </div>
+            </div>
+            <div class="simplebar-track simplebar-horizontal" style="visibility: hidden;">
+                <div class="simplebar-scrollbar" style="width: 0px; display: none;"></div>
+            </div>
+            <div class="simplebar-track simplebar-vertical" style="visibility: hidden;">
+                <div class="simplebar-scrollbar"
+                     style="height: 0px; transform: translate3d(0px, 0px, 0px); display: none;">
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main">
+        <nav class="navbar navbar-expand navbar-light navbar-bg">
+            <a class="sidebar-toggle js-sidebar-toggle">
+                <i class="hamburger align-self-center"></i>
+            </a>
+            <div class="navbar-collapse collapse"></div>
+        </nav>
+        <main class="content">
+            <div class="">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">Создание пациента</h5>
+
                     </div>
-                    <div class="mb-3">
-                        <label class="form-check m-0">
-                            <input type="checkbox" th:field="*{consern}" class="form-check-input">
-                            <span class="form-check-label">Согласен на обработку персональных данных</span>
+                    <div class="card-body">
+
+                        <form th:action="@{/api/v1/patients/save}" th:method="post">
+                            <div class="row">
+                                <div class="mb-4 col-md-3">
+                                    <label class="form-label">PID</label>
+                                    <input type="text" required th:field="*{addPatientForm.pid}" class="form-control"
+                                           id="pid">
+
+                                </div>
+                                <div class="mb-4 col-md-3">
+                                    <label class="form-label">Фамилия</label>
+                                    <input type="text" required th:field="*{addPatientForm.lastName}"
+                                           class="form-control" id="lastName">
+                                </div>
+
+                                <div class="mb-4 col-md-3">
+                                    <label class="form-label">Имя</label>
+                                    <input type="text" required th:field="*{addPatientForm.firstName}"
+                                           class="form-control"
+                                           id="firstName">
+                                </div>
+                                <div class="mb-4 col-md-3">
+                                    <label class="form-label">Отчество</label>
+                                    <input type="text" class="form-control" id="surName">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="mb-3 col-md-4">
+                                    <label class="form-label">Дата рождения
+                                        <input required class="form-control" th:field="*{addPatientForm.dob}"
+                                               data-inputmask-alias="datetime"
+                                               data-inputmask-inputformat="DD/MM/YYYY"
+                                               inputmode="numeric" type="date">
+                                        <span class="text-muted">e.g "mm/dd/YYYY"</span>
+                                    </label>
+                                </div>
+                                <label class="col-form-label col-sm-2 text-sm-end pt-sm-0">Пол</label>
+                                <div class="mb-3 col-md-4">
+                                    <label class="form-check">
+                                        <input name="gender" th:text="M" th:selected="*{addPatientForm == 'M'}" type="radio"
+                                               class="form-check-input" value="M">
+                                        <span class="form-check-label"></span>
+                                    </label>
+                                    <label class="form-check">
+                                        <input name="gender" th:text="Ж" th:selected="*{addPatientForm == 'F'}" type="radio"
+                                               class="form-check-input" value="F">
+                                        <span class="form-check-label"></span>
+                                    </label>
+
+                                    <label class="form-check">
+                                        <input name="gender" th:text="Другое" th:selected="*{addPatientForm == 'other'}" type="radio"
+                                               class="form-check-input" value="other">
+                                        <span class="form-check-label"></span>
+                                    </label></div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Улица, дом, квартира</label>
+                                <input type="text" th:field="*{addPatientForm.address}" class="form-control"
+                                       id="inputAddress"
+                                       placeholder="адрес">
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label">Город</label>
+                                    <input type="text" th:field="*{addPatientForm.city}" class="form-control"
+                                           id="inputCity">
+                                </div>
+                                <div class="mb-3 col-md-4">
+                                    <label class="form-label">Область</label>
+                                    <select id="inputState" name="state" class="form-control">
+                                        <option th:value="'na'" th:text="Выбрать"
+                                                th:selected="*{addPatientForm == 'na'}"></option>
+                                        <option th:value="'mn'" th:text="Минская"
+                                                th:selected="*{addPatientForm == 'mn'}"></option>
+                                        <option th:value="'gr'" th:text="Гродненская"
+                                                th:selected="*{addPatientForm == 'gr'}"></option>
+                                        <option th:value="'br'" th:text="Брестская"
+                                                th:selected="*{addPatientForm == 'br'}"></option>
+                                        <option th:value="'gm'" th:text="Гомельская"
+                                                th:selected="*{addPatientForm == 'gm'}"></option>
+                                        <option th:value="'mg'" th:text="Могилевская"
+                                                th:selected="*{addPatientForm == 'mg'}"></option>
+                                        <option th:value="'vt'" th:text="Витебская"
+                                                th:selected="*{addPatientForm == 'vt'}"></option>
+                                    </select>
+                                </div>
+                                <div class="mb-3 col-md-2">
+                                    <label class="form-label">Почтовый код</label>
+                                    <input type="text" th:field="*{addPatientForm.zipcode}" class="form-control"
+                                           id="inputZip">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label">Email address</label>
+                                    <input required type="email" th:field="*{addPatientForm.email}" class="form-control"
+                                           placeholder="Email">
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label">Телефон</label>
+                                    <input type="text" th:field="*{addPatientForm.phone}"
+                                           class="form-control" id="phone">
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">File input</label>
+                                <input class="form-control" type="file">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-check m-0">
+                                    <input type="checkbox" th:field="*{addPatientForm.consern}"
+                                           class="form-check-input">
+                                    <span class="form-check-label">Согласен на обработку персональных данных</span>
+                                </label>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col-md-6">
+                                    <button type="submit" class="btn btn-primary" name="send" value="save">Сохранить
+                                    </button>
+                                </div>
+
+
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <div class="container-fluid">
+                <div class="row text-muted">
+                    <div class="col-6 text-start">
+                        <p class="mb-0">
+                            <a href="https://adminkit.io/" target="_blank" class="text-muted"><strong>AdminKit</strong></a>
+                            ©
+                        </p>
+                    </div>
+                    <div class="col-6 text-end">
+                        <ul class="list-inline">
+                            <li class="list-inline-item">
+                                <a class="text-muted" href="#">Support</a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a class="text-muted" href="#">Help Center</a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a class="text-muted" href="#">Privacy</a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a class="text-muted" href="#">Terms</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Datatables Orders
+        $("#datatables-orders").DataTable({
+            responsive: true,
+            aoColumnDefs: [{
+                bSortable: false,
+                aTargets: [-1]
+            }]
+        });
+    });
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+        setTimeout(function () {
+            if (localStorage.getItem('popState') !== 'shown') {
+                window.notyf.open({
+                    type: "success",
+                    message: "Get access to all 500+ components and 45+ pages with AdminKit PRO. <u><a class=\"text-white\" href=\"https://adminkit.io/pricing\" target=\"_blank\">More info</a></u> 🚀",
+                    duration: 10000,
+                    ripple: true,
+                    dismissible: false,
+                    position: {
+                        x: "left",
+                        y: "bottom"
+                    }
+                });
+
+                localStorage.setItem('popState', 'shown');
+            }
+        }, 15000);
+    });
+</script>
+
+
+<div class="settings js-settings">
+    <div class="settings-toggle js-settings-toggle">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+             class="feather feather-sliders align-middle">
+            <line x1="4" y1="21" x2="4" y2="14"></line>
+            <line x1="4" y1="10" x2="4" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="12"></line>
+            <line x1="12" y1="8" x2="12" y2="3"></line>
+            <line x1="20" y1="21" x2="20" y2="16"></line>
+            <line x1="20" y1="12" x2="20" y2="3"></line>
+            <line x1="1" y1="14" x2="7" y2="14"></line>
+            <line x1="9" y1="8" x2="15" y2="8"></line>
+            <line x1="17" y1="16" x2="23" y2="16"></line>
+        </svg>
+    </div>
+
+    <div class="settings-panel">
+        <div class="settings-content">
+            <div class="settings-title d-flex align-items-center">
+                <button type="button" class="btn-close float-right js-settings-toggle" aria-label="Close"></button>
+
+                <h4 class="mb-0 ms-2 d-inline-block">Explore AdminKit <sup><small
+                        class="badge bg-primary text-uppercase">Pro</small></sup></h4>
+            </div>
+
+            <div class="settings-body">
+
+                <div class="alert alert-primary" role="alert">
+                    <div class="alert-message">
+                        <strong>Hey there!</strong> Choose the color scheme, sidebar and layout that best fits your
+                        project needs.
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <span class="d-block fw-bold">Color scheme</span>
+                    <span class="d-block text-muted mb-2">The perfect color mode for your app.</span>
+                    <div class="row g-0 text-center mx-n1 mb-2">
+                        <div class="col">
+                            <label class="mx-1 d-block mb-1">
+                                <input class="settings-scheme-label" type="radio" name="theme" value="default">
+                                <div class="settings-scheme">
+                                    <div class="settings-scheme-theme settings-scheme-theme-default"></div>
+                                </div>
+                            </label>
+                            Default
+                        </div>
+                        <div class="col">
+                            <label class="mx-1 d-block mb-1">
+                                <input class="settings-scheme-label" type="radio" name="theme" value="colored">
+                                <div class="settings-scheme">
+                                    <div class="settings-scheme-theme settings-scheme-theme-colored"></div>
+                                </div>
+                            </label>
+                            Colored
+                        </div>
+                    </div>
+                    <div class="row g-0 text-center mx-n1">
+                        <div class="col">
+                            <label class="mx-1 d-block mb-1">
+                                <input class="settings-scheme-label" type="radio" name="theme" value="dark">
+                                <div class="settings-scheme">
+                                    <div class="settings-scheme-theme settings-scheme-theme-dark"></div>
+                                </div>
+                            </label>
+                            Dark
+                        </div>
+                        <div class="col">
+                            <label class="mx-1 d-block mb-1">
+                                <input class="settings-scheme-label" type="radio" name="theme" value="light">
+                                <div class="settings-scheme">
+                                    <div class="settings-scheme-theme settings-scheme-theme-light"></div>
+                                </div>
+                            </label>
+                            Light
+                        </div>
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="mb-3">
+                    <span class="d-block fw-bold">Sidebar layout</span>
+                    <span class="d-block text-muted mb-2">Change the layout of the sidebar.</span>
+                    <div>
+                        <label>
+                            <input class="settings-button-label" type="radio" name="sidebarLayout" value="default">
+                            <div class="settings-button">
+                                Default
+                            </div>
+                        </label>
+                        <label>
+                            <input class="settings-button-label" type="radio" name="sidebarLayout" value="compact">
+                            <div class="settings-button">
+                                Compact
+                            </div>
                         </label>
                     </div>
-                </form>
+                </div>
+
+                <hr>
+
+                <div class="mb-3">
+                    <span class="d-block fw-bold">Sidebar position</span>
+                    <span class="d-block text-muted mb-2">Toggle the position of the sidebar.</span>
+                    <div>
+                        <label>
+                            <input class="settings-button-label" type="radio" name="sidebarPosition" value="left">
+                            <div class="settings-button">
+                                Left
+                            </div>
+                        </label>
+                        <label>
+                            <input class="settings-button-label" type="radio" name="sidebarPosition" value="right">
+                            <div class="settings-button">
+                                Right
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="mb-3">
+                    <span class="d-block fw-bold">Layout</span>
+                    <span class="d-block text-muted mb-2">Toggle container layout system.</span>
+                    <div>
+                        <label>
+                            <input class="settings-button-label" type="radio" name="layout" value="fluid">
+                            <div class="settings-button">
+                                Fluid
+                            </div>
+                        </label>
+                        <label>
+                            <input class="settings-button-label" type="radio" name="layout" value="boxed">
+                            <div class="settings-button">
+                                Boxed
+                            </div>
+                        </label>
+                    </div>
+                </div>
             </div>
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save</button>
+
+            <div class="settings-footer">
+                <div class="d-grid">
+                    <a class="btn btn-primary btn-lg btn-block" href="https://adminkit.io/pricing/" target="_blank">Get
+                        AdminKit PRO</a>
+                </div>
             </div>
+
         </div>
     </div>
 </div>
+<div class="notyf"></div>
+<div class="notyf-announcer" aria-atomic="true" aria-live="polite"
+     style="border: 0px; clip: rect(0px, 0px, 0px, 0px); height: 1px; margin: -1px; overflow: hidden; padding: 0px; position: absolute; width: 1px; outline: 0px;"></div>
+<svg id="SvgjsSvg1001" width="2" height="0" xmlns="http://www.w3.org/2000/svg" version="1.1"
+     xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev"
+     style="overflow: hidden; top: -100%; left: -100%; position: absolute; opacity: 0;">
+    <defs id="SvgjsDefs1002"></defs>
+    <polyline id="SvgjsPolyline1003" points="0,0"></polyline>
+    <path id="SvgjsPath1004" d="M0 0 "></path>
+</svg>
+</body>
+</html>

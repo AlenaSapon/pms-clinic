@@ -6,11 +6,13 @@ import com.sapon.pmsc.repository.AllergyRepository;
 import com.sapon.pmsc.repository.PatientRepository;
 import com.sapon.pmsc.service.AllergyService;
 import com.sapon.pmsc.service.PatientService;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,11 +39,11 @@ public class AllergyController {
         return mav;
     }
 
-    @GetMapping("/allergies/{allergyId}")
-    public ResponseEntity<Allergy> findAllergyById(@PathVariable Long allergyId) {
-        Allergy allergy = allergyService.findAllergyById(allergyId);
-        return ResponseEntity.ok(allergy);
-    }
+//    @GetMapping("/allergies/{allergyId}")
+//    public ResponseEntity<Allergy> findAllergyById(@PathVariable Long allergyId) {
+//        Allergy allergy = allergyService.findAllergyById(allergyId);
+//        return ResponseEntity.ok(allergy);
+//    }
 
     @PostMapping("/patients/{patientId}/allergies")
     public ResponseEntity<Allergy> addNewAllergy(@PathVariable Long patientId,
@@ -55,11 +57,12 @@ public class AllergyController {
     }
 
 
-    @DeleteMapping("/allergies/{id}")
-    public ResponseEntity<HttpStatus> deleteAllergy(@PathVariable("id") Long id) {
+    @DeleteMapping("/allergies/{allergyId}")
+    public ResponseEntity<HttpStatus> deleteAllergy(@PathVariable("allergyId") Long id) {
         allergyRepository.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
 
     @PutMapping(path = "/allergies/{allergyId}")
     public void updateAllergy(

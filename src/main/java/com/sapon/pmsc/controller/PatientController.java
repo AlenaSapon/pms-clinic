@@ -2,6 +2,7 @@ package com.sapon.pmsc.controller;
 
 import com.sapon.pmsc.model.Patient;
 import com.sapon.pmsc.service.PatientService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -39,25 +40,29 @@ public class PatientController {
         return mav;
     }
 
-//    @GetMapping("/patients/new")
-//    public String addPatient(Model model) {
-//        Patient patient = new Patient();
-//        model.addAttribute("patients", patient);
-//        return "patients";
-//    }
-    @PostMapping()
-    public  ModelAndView registerNewPatient(@ModelAttribute Patient patient) {
+    @GetMapping("/new")
+    public ModelAndView newPatient() {
+        Patient patient = new Patient();
+        ModelAndView mav = new ModelAndView("addPatientForm");
+        mav.addObject("addPatientForm", patient);
+        return mav;
+    }
+
+   @PostMapping("/save")
+    public void saveNewPatient(Patient patient, HttpServletResponse response) throws IOException {
         patientService.addNewPatient(patient);
-        return new ModelAndView("patient");
-            }
+        response.sendRedirect("/api/v1/patients/" + patient.getId());
+    }
+
+//    public ResponseEntity<Void> createPatient(@ModelAttribute("patient") Patient patient) {
+//        patientService.addNewPatient(patient);
+//        return ResponseEntity.ok().build();
+//    }
+
+
 //    @PostMapping
 //    public void registerNewPatient(@RequestBody Patient patient) {
 //        patientService.addNewPatient(patient);
-//    }
-
-//    @DeleteMapping(path = "{patientId}")
-//    public void deletePatient(@PathVariable("patientId") Long patientId) {
-//        patientService.deletePatient(patientId);
 //    }
 
     @GetMapping("/delete/{id}")

@@ -50,11 +50,11 @@ public class Patient {
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @Column(name = "gender", nullable = false)
+    @Column(name = "gender")
     private String gender;
 
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
-    @Column(name = "dob", nullable = false)
+    @DateTimeFormat (pattern="yyyy-MM-dd")
+    @Column(name = "dob")
     private LocalDate dob;
 
     @Transient

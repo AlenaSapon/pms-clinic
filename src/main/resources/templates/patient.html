@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+
 <head>
+    <script src="jquery-3.7.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
     <script type="text/javascript" async=""
             src="https://www.googletagmanager.com/gtag/js?id=G-E5NYXQXSSJ&amp;l=dataLayer&amp;cx=c"></script>
@@ -201,18 +205,18 @@
                             <div class="row">
                                 <div class="mb-4 col-md-3">
                                     <label class="form-label">PID</label>
-                                    <input type="text" th:field="${patient.pid}" class="form-control" id="pid">
+                                    <input type="text" th:field="*{patient.pid}" class="form-control" id="pid">
 
                                 </div>
                                 <div class="mb-4 col-md-3">
                                     <label class="form-label">Фамилия</label>
-                                    <input type="text" th:field="${patient.lastName}" class="form-control"
+                                    <input type="text" th:field="*{patient.lastName}" class="form-control"
                                            id="lastName">
                                 </div>
 
                                 <div class="mb-4 col-md-3">
                                     <label class="form-label">Имя</label>
-                                    <input type="text" th:field="${patient.firstName}" class="form-control"
+                                    <input type="text" th:field="*{patient.firstName}" class="form-control"
                                            id="firstName">
                                 </div>
                                 <div class="mb-4 col-md-3">
@@ -223,8 +227,9 @@
 
                             <div class="row">
                                 <div class="mb-3 col-md-4">
-                                    <label class="form-label">Date
-                                        <input class="form-control" th:dates="${patient.dob}" data-inputmask-alias="datetime"
+                                    <label class="form-label">Дата рождения
+                                        <input class="form-control" th:value="*{{patient.dob}}"
+                                               data-inputmask-alias="datetime"
                                                data-inputmask-inputformat="DD/MM/YYYY"
                                                inputmode="numeric" type="date">
                                         <span class="text-muted">e.g "mm/dd/YYYY"</span>
@@ -233,50 +238,66 @@
                                 <label class="col-form-label col-sm-2 text-sm-end pt-sm-0">Пол</label>
                                 <div class="mb-3 col-md-4">
                                     <label class="form-check">
-                                        <input name="gender" type="radio" class="form-check-input" value="M" th:checked="${patient.gender}">
+                                        <input name="gender" type="radio" th:checked="*{patient.gender == 'M'}" class="form-check-input" value="M">
                                         <span class="form-check-label">М</span>
                                     </label>
                                     <label class="form-check">
-                                        <input name="gender" type="radio" class="form-check-input" value="F">
+                                        <input name="gender" type="radio"  th:checked="*{patient.gender == 'F'}" class="form-check-input" value="F">
                                         <span class="form-check-label">Ж</span>
                                     </label>
 
                                     <label class="form-check">
-                                        <input name="gender" type="radio" class="form-check-input" value="O">
+                                        <input name="gender" type="radio"  th:checked="*{patient.gender == 'other'}" class="form-check-input" value="other">
                                         <span class="form-check-label">Другое</span>
                                     </label></div>
                             </div>
 
                             <div class="mb-3">
                                 <label class="form-label">Улица, дом, квартира</label>
-                                <input type="text" th:field="${patient.address}" class="form-control" id="inputAddress"
+                                <input type="text" th:field="*{patient.address}" class="form-control" id="inputAddress"
                                        placeholder="адрес">
                             </div>
                             <div class="row">
                                 <div class="mb-3 col-md-6">
                                     <label class="form-label">Город</label>
-                                    <input type="text" th:field="${patient.city}" class="form-control" id="inputCity">
+                                    <input type="text" th:field="*{patient.city}" class="form-control" id="inputCity">
                                 </div>
                                 <div class="mb-3 col-md-4">
                                     <label class="form-label">Область</label>
-                                    <select id="inputState" class="form-control" th:selected="${patient.state}">
-                                        <option>Минская</option>
-                                        <option>Гродненская</option>
-                                        <option>Гомельская</option>
-                                        <option>Брестская</option>
-                                        <option>Витебская</option>
-                                        <option>Могилевская</option>
+                                    <select id="inputState" name="state" class="form-control">
+                                        <option th:value="'na'" th:text="Выбрать"
+                                                th:selected="*{patient.state == 'na'}"></option>
+                                        <option th:value="'mn'" th:text="Минская"
+                                                th:selected="*{patient.state == 'mn'}"></option>
+                                        <option th:value="'gr'" th:text="Гродненская"
+                                                th:selected="*{patient.state == 'gr'}"></option>
+                                        <option th:value="'br'" th:text="Брестская"
+                                                th:selected="*{patient.state == 'br'}"></option>
+                                        <option th:value="'gm'" th:text="Гомельская"
+                                                th:selected="*{patient.state == 'gm'}"></option>
+                                        <option th:value="'mg'" th:text="Могилевская"
+                                                th:selected="*{patient.state == 'mg'}"></option>
+                                        <option th:value="'vt'" th:text="Витебская"
+                                                th:selected="*{patient.state == 'vt'}"></option>
+
                                     </select>
                                 </div>
                                 <div class="mb-3 col-md-2">
                                     <label class="form-label">Почтовый код</label>
-                                    <input type="text" th:field="${patient.zipcode}" class="form-control" id="inputZip">
+                                    <input type="text" th:field="*{patient.zipcode}" class="form-control" id="inputZip">
                                 </div>
                             </div>
-                            <div class="mb-3">
-                                <label class="form-label">Email address</label>
-                                <input type="email" th:field="${patient.email}" class="form-control"
-                                       placeholder="Email">
+                            <div class="row">
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label">Email address</label>
+                                    <input required type="email" th:field="*{patient.email}" class="form-control"
+                                           placeholder="Email">
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label">Телефон</label>
+                                    <input type="text" th:field="*{patient.phone}"
+                                           class="form-control" id="phone">
+                                </div>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">File input</label>
@@ -284,7 +305,7 @@
                             </div>
                             <div class="mb-3">
                                 <label class="form-check m-0">
-                                    <input type="checkbox" class="form-check-input" th:checked="${patient.consern}">
+                                    <input type="checkbox" class="form-check-input" th:checked="*{patient.consern}">
                                     <span class="form-check-label">Согласен на обработку персональных данных</span>
                                 </label>
                             </div>
@@ -308,7 +329,7 @@
                                             </div>
                                             <div class="modal-body m-3">
                                                 <p class="mb-0">Please, confirm you action.</p>
-                                                <p>The patient <strong th:text="${patient.lastName} +' ' + ${patient.firstName}">  </strong> will never come back!</p>
+                                                <p>The patient <strong th:text="*{patient.lastName} +' ' + *{patient.firstName}">  </strong> will never come back!</p>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
