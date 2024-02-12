@@ -32,10 +32,10 @@ public class AllergyController {
         return mav;
     }
 
-    @GetMapping("/patients/{id}/allergiesForm")
+    @GetMapping("/patients/{id}/allergiesCard")
     public ModelAndView getNewAllergiesByPatientId(@PathVariable Long id) {
-        ModelAndView mav = new ModelAndView("fragments/allergiesForm");
-        mav.addObject("allergiesForm", allergyRepository.findByPatientId(id));
+        ModelAndView mav = new ModelAndView("fragments/allergiesCard");
+        mav.addObject("allergiesCard", allergyRepository.findByPatientId(id));
         return mav;
     }
 

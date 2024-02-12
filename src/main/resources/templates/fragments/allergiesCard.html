@@ -1,14 +1,14 @@
 <div class="col-12">
-    <div id="allergiesForm" th:each="allergy: ${allergies}" class="card">
+    <div th:id="'allergiesCard' + ${allergy.id}" th:each="allergy: ${allergies}" class="card">
         <div class="card-header">
             <h5 class="card-title mb-0" th:text="${allergy.title}"></h5>
         </div>
         <div class="card-body" th:text="${allergy.reaction}"></div>
         <div align="right">
-            <form >
-                <button type="button" class="btn" onclick="updateAllergyList()"
-                   th:action="@{/api/v1/allergies/delete/{allergyId}(allergyId=${allergy.id})}"
-                  >
+            <form th:action="@{/api/v1/allergies/delete/{allergyId}(allergyId=${allergy.id})}">
+                <button type="submit" class="btn"
+
+                        th:onclick="'javascript:updateAllergyList(' + ${allergy.id} + ')'">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                          viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                          stroke-linecap="round" stroke-linejoin="round"

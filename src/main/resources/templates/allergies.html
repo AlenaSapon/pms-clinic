@@ -198,12 +198,18 @@
             </div>
         </nav>
         <main class="content">
-            <a href="#" class="btn btn-primary float-end mt-n1"><i class="fas fa-plus"></i> Добавить аллергию</a>
+            <a href="#" class="btn btn-primary float-end mt-n1"
+               data-bs-toggle="modal"
+               data-bs-target="#addAllergyModal">
+                <i class="fas fa-plus"></i> Добавить аллергию</a>
+
+            <div th:replace="fragments/addAllergyModal"></div>
+
             <div class="container-fluid p-0">
                 <h1 class="h3 mb-3">Аллергии</h1>
                 <div class="row allergiesForm">
 
-               <div th:replace="fragments/allergiesForm"></div>
+                    <div th:replace="fragments/allergiesCard"></div>
 
                 </div>
 
@@ -275,11 +281,15 @@
     });
 </script>
 <script>
-    function updateAllergyList() {
-        $.get("allergiesForm").done(function (fragment) { // get from controller
-            $("#allergiesForm").replaceWith(fragment); // update snippet of page
+    function updateAllergyList(allergyId) {
+        $.get("allergiesCard").done(function (fragment) { // get from controller
+            $("#allergiesCard" + allergyId).replaceWith(fragment); // update snippet of page
         });
     }
+</script>
+
+<script>
+
 </script>
 
 <div class="settings js-settings">
