@@ -1,7 +1,5 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
-
 <head>
     <script src="jquery-3.7.1.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -206,7 +204,6 @@
                                 <div class="mb-4 col-md-3">
                                     <label class="form-label">PID</label>
                                     <input type="text" th:field="*{patient.pid}" class="form-control" id="pid">
-
                                 </div>
                                 <div class="mb-4 col-md-3">
                                     <label class="form-label">Фамилия</label>
@@ -238,16 +235,19 @@
                                 <label class="col-form-label col-sm-2 text-sm-end pt-sm-0">Пол</label>
                                 <div class="mb-3 col-md-4">
                                     <label class="form-check">
-                                        <input name="gender" type="radio" th:checked="*{patient.gender == 'M'}" class="form-check-input" value="M">
+                                        <input name="gender" type="radio" th:checked="*{patient.gender == 'M'}"
+                                               class="form-check-input" value="M">
                                         <span class="form-check-label">М</span>
                                     </label>
                                     <label class="form-check">
-                                        <input name="gender" type="radio"  th:checked="*{patient.gender == 'F'}" class="form-check-input" value="F">
+                                        <input name="gender" type="radio" th:checked="*{patient.gender == 'F'}"
+                                               class="form-check-input" value="F">
                                         <span class="form-check-label">Ж</span>
                                     </label>
 
                                     <label class="form-check">
-                                        <input name="gender" type="radio"  th:checked="*{patient.gender == 'other'}" class="form-check-input" value="other">
+                                        <input name="gender" type="radio" th:checked="*{patient.gender == 'other'}"
+                                               class="form-check-input" value="other">
                                         <span class="form-check-label">Другое</span>
                                     </label></div>
                             </div>
@@ -313,27 +313,34 @@
                                 <div class="mb-3 col-md-6">
                                     <button class="btn btn-primary" name="send" value="save">Сохранить</button>
                                 </div>
-                                <div align="right" class="mb-3 col-md-6" >
-                                <a  class="btn btn-danger"
-                                   data-bs-target="#defaultModalDanger"
-                                   data-bs-toggle="modal">
-                                   Удалить</a>
+                                <div align="right" class="mb-3 col-md-6">
+                                    <a class="btn btn-danger"
+                                       data-bs-target="#defaultModalDanger"
+                                       data-bs-toggle="modal">
+                                        Удалить</a>
                                 </div>
 
-                                <div class="modal fade" id="defaultModalDanger" tabindex="-1" style="display: none;" aria-hidden="true">
+                                <div class="modal fade" id="defaultModalDanger" tabindex="-1" style="display: none;"
+                                     aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h5 class="modal-title">Deleting the patient </h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body m-3">
                                                 <p class="mb-0">Please, confirm you action.</p>
-                                                <p>The patient <strong th:text="*{patient.lastName} +' ' + *{patient.firstName}">  </strong> will never come back!</p>
+                                                <p>The patient <strong
+                                                        th:text="*{patient.lastName} +' ' + *{patient.firstName}"> </strong>
+                                                    will never come back!</p>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                <a type="button" th:href="@{/api/v1/patients/delete/{id}(id=${patient.id})}"
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                                    Close
+                                                </button>
+                                                <a type="button"
+                                                   th:href="@{/api/v1/patients/delete/{id}(id=${patient.id})}"
                                                    class="btn btn-danger">Yes, delete</a>
                                             </div>
                                         </div>
@@ -377,7 +384,6 @@
         </footer>
     </div>
 </div>
-
 
 
 <script>

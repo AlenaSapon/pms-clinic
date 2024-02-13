@@ -198,14 +198,14 @@
             </div>
         </nav>
         <main class="content">
-            <a href="#" class="btn btn-primary float-end mt-n1"
+            <a th:href="@{/api/v1/allergy/addAllergyModal}"  class="btn btn-primary float-end mt-n1"
                data-bs-toggle="modal"
                data-bs-target="#addAllergyModal">
                 <i class="fas fa-plus"></i> Добавить аллергию</a>
 
-            <div th:replace="fragments/addAllergyModal"></div>
+            <div th:replace="fragments/addAllergyModal" ></div>
 
-            <div class="container-fluid p-0">
+            <div class="container-fluid p-0" >
                 <h1 class="h3 mb-3">Аллергии</h1>
                 <div class="row allergiesForm">
 

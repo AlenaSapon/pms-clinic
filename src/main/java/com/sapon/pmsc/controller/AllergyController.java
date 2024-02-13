@@ -1,6 +1,7 @@
 package com.sapon.pmsc.controller;
 
 import com.sapon.pmsc.model.Allergy;
+import com.sapon.pmsc.model.Patient;
 import com.sapon.pmsc.repository.AllergyRepository;
 import com.sapon.pmsc.repository.PatientRepository;
 import com.sapon.pmsc.service.AllergyService;
@@ -38,6 +39,13 @@ public class AllergyController {
         mav.addObject("allergiesCard", allergyRepository.findByPatientId(id));
         return mav;
     }
+    @GetMapping("/allergy/addAllergyModal")
+    public ModelAndView getAllergyModal() {
+        ModelAndView mav = new ModelAndView("fragments/addAllergyModal");
+        mav.addObject("addAllergyModal", new Allergy());
+        mav.addObject("currentPatient");
+        return mav;
+    }
 
     //    @GetMapping("/allergies/{allergyId}")
 //    public ResponseEntity<Allergy> findAllergyById(@PathVariable Long allergyId) {
@@ -45,14 +53,14 @@ public class AllergyController {
 //        return ResponseEntity.ok(allergy);
 //    }
 
-    @PostMapping("/patients/{patientId}/allergies")
-    public ResponseEntity<Allergy> addNewAllergy(@PathVariable Long patientId,
+
+    @PostMapping("/allergy/save")
+    public ResponseEntity<Allergy> addNewAllergy(@RequestParam("patientId") Long patientId,
                                                  @RequestBody Allergy allergyRequest) {
         Allergy allergy = patientRepository.findById(patientId).map(patient -> {
             allergyRequest.setPatient(patient);
             return allergyRepository.save(allergyRequest);
         }).orElseThrow(() -> new IllegalStateException("Not found Patient with id = " + patientId));
-        ;
         return new ResponseEntity<>(allergy, HttpStatus.CREATED);
     }
 

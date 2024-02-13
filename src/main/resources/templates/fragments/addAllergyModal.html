@@ -1,18 +1,20 @@
-<div class="modal fade" id="addAllergyModal" th:fragment="addAllergyModal" tabindex="-1" style="display: none;"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <div class="row">
-                    <div>
-                        <h5 class="modal-title">Add Allergy</h5>
-                    </div>
-                </div>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form >
-                <div class="modal-body m-3">
+<form th:fragment="addAllergyModal" th:action="@{/api/v1/allergy/save?patientId=${patient.id}}" method="post">
+<div class="modal fade" id="addAllergyModal"
 
+      tabindex="-1" style="display: none;"
+     aria-hidden="true">
+           <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="row">
+                        <div>
+                            <h5 class="modal-title">Add Allergy</h5>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body m-3">
                     <div class="mb-3 col-md-5">
                         <label class="form-label">Allergy title
                             <input type="text" class="form-control" id="allergyTitle">
@@ -26,9 +28,11 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <a type="button" class="btn btn-primary">Save</a>
+                    <button type="submit" class="btn btn-primary">Save</button>
                 </div>
-            </form>
+
+            </div>
         </div>
-    </div>
+
 </div>
+</form>
