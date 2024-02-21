@@ -34,7 +34,7 @@ public class AllergyController {
         mav.addObject("allergies", allergyRepository.findByPatientId(id));
         mav.addObject("patient", patientRepository.findById(id).orElseThrow());
         mav.addObject("newAllergy", new Allergy());
-                return mav;
+        return mav;
     }
 
     @GetMapping("/patients/{id}/allergiesCard")
@@ -47,7 +47,7 @@ public class AllergyController {
     @GetMapping("/{id}/allergy/newAllergy")
     public ModelAndView getAllergyModal(@PathVariable Long id) {
         ModelAndView mav = new ModelAndView("fragments/newAllergy");
-       // mav.addObject("newAllergy", new Allergy());
+        // mav.addObject("newAllergy", new Allergy());
         mav.addObject("patient", patientRepository.findById(id).orElseThrow());
         return mav;
     }
@@ -61,7 +61,7 @@ public class AllergyController {
 
     @PostMapping("/allergy/save")
     public ResponseEntity<Allergy> addNewAllergy(@RequestParam("patientId") Long patientId,
-                                                  Allergy allergyRequest,
+                                                 Allergy allergyRequest,
                                                  HttpServletResponse response) throws IOException {
         Allergy allergy = patientRepository.findById(patientId).map(patient -> {
             allergyRequest.setPatient(patient);

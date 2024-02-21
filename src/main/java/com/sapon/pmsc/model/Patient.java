@@ -1,7 +1,9 @@
 package com.sapon.pmsc.model;
 
+import com.sapon.pmsc.service.AttributeEncryptor;
 import jakarta.persistence.*;
 import lombok.*;
+import org.aspectj.bridge.IMessage;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -14,6 +16,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
 @Data
 @Getter
 @Setter
@@ -44,34 +47,44 @@ public class Patient {
     @Column(name = "pid", nullable = false)
     private String pid;
 
+    @Convert(converter = AttributeEncryptor.class)
     @Column(name = "first_name", nullable = false)
     private String firstName;
 
+    @Convert(converter = AttributeEncryptor.class)
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
+    @Convert(converter = AttributeEncryptor.class)
     @Column(name = "gender")
     private String gender;
 
-    @DateTimeFormat (pattern="yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "dob")
     private LocalDate dob;
 
     @Transient
     private Integer age;
 
+    @Convert(converter = AttributeEncryptor.class)
     @Column(name = "email")
     private String email;
+
     @Column(name = "phone")
     private String phone;
+
     @Column(name = "address")
     private String address;
+
     @Column(name = "city")
     private String city;
+
     @Column(name = "state")
     private String state;
+
     @Column(name = "zipcode")
     private String zipcode;
+
     @Column(name = "consern")
     private Boolean consern;
 
