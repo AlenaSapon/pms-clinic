@@ -55,7 +55,6 @@ public class Patient {
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @Convert(converter = AttributeEncryptor.class)
     @Column(name = "gender")
     private String gender;
 
@@ -66,22 +65,25 @@ public class Patient {
     @Transient
     private Integer age;
 
-    @Convert(converter = AttributeEncryptor.class)
     @Column(name = "email")
     private String email;
 
     @Column(name = "phone")
     private String phone;
 
+    @Convert(converter = AttributeEncryptor.class)
     @Column(name = "address")
     private String address;
 
+    @Convert(converter = AttributeEncryptor.class)
     @Column(name = "city")
     private String city;
 
+    @Convert(converter = AttributeEncryptor.class)
     @Column(name = "state")
     private String state;
 
+    @Convert(converter = AttributeEncryptor.class)
     @Column(name = "zipcode")
     private String zipcode;
 

@@ -1,10 +1,13 @@
 package com.sapon.pmsc.service;
 
+import com.sapon.pmsc.helper.BusinessLogMessage;
+import com.sapon.pmsc.helper.BusinessMessage;
 import com.sapon.pmsc.model.Patient;
 import com.sapon.pmsc.repository.PatientRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -12,6 +15,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Service
+@Slf4j
 public class PatientService {
 
     private final PatientRepository patientRepository;
@@ -30,27 +34,31 @@ public class PatientService {
                 .findPatientByEmail(patient.getEmail());
 
         if (patientByEmail.isPresent()) {
-            throw new IllegalStateException("email is taken");
+            log.error(BusinessLogMessage.Patient.PATIENT_ALREADY_EXISTS_EMAIL);
+            throw new IllegalStateException(BusinessMessage.Patient.PATIENT_ALREADY_EXISTS_EMAIL);
         }
 
         Optional<Patient> patientByPid = patientRepository
                 .findPatientByPid(patient.getPid());
 
         if (patientByPid.isPresent()) {
-            throw new IllegalStateException("pid is taken");
+            log.error(BusinessLogMessage.Patient.PATIENT_ALREADY_EXISTS_PID);
+            throw new IllegalStateException(BusinessMessage.Patient.PATIENT_ALREADY_EXISTS_PID);
         }
 
         patientRepository.save(patient);
+        log.info(BusinessLogMessage.Patient.PATIENT_CREATED);
         return patient;
     }
 
     public void deletePatient(Long patientId) {
         boolean exists = patientRepository.existsById(patientId);
         if (!exists) {
-            throw new IllegalStateException("patient with id "
-                    + patientId + " doesn't exist");
+
+            throw new IllegalStateException(BusinessMessage.Patient.PATIENT_NOT_FOUND);
         }
         patientRepository.deleteById(patientId);
+        log.info(BusinessLogMessage.Patient.PATIENT_DELETED);
     }
 
     @Transactional
@@ -68,8 +76,7 @@ public class PatientService {
                               String zipcode,
                               boolean consern) {
         Patient patient = patientRepository.findById(patientId)
-                .orElseThrow(() -> new IllegalStateException(
-                        "patient with id " + patientId + " doesn't exist"));
+                .orElseThrow(() -> new IllegalStateException(BusinessMessage.Patient.PATIENT_NOT_FOUND));
 
         if (firstName != null &&
                 !firstName.isEmpty() &&
@@ -83,7 +90,8 @@ public class PatientService {
             Optional<Patient> patientOptional = patientRepository
                     .findPatientByEmail(email);
             if (patientOptional.isPresent()) {
-                throw new IllegalStateException("email is already taken");
+                log.error(BusinessLogMessage.Patient.PATIENT_ALREADY_EXISTS_EMAIL);
+                throw new IllegalStateException(BusinessMessage.Patient.PATIENT_ALREADY_EXISTS_EMAIL);
             }
             patient.setEmail(email);
         }
@@ -94,7 +102,8 @@ public class PatientService {
             Optional<Patient> patientOptional = patientRepository
                     .findPatientByPid(pid);
             if (patientOptional.isPresent()) {
-                throw new IllegalStateException("PID is already taken");
+                log.error(BusinessLogMessage.Patient.PATIENT_ALREADY_EXISTS_PID);
+                throw new IllegalStateException(BusinessMessage.Patient.PATIENT_ALREADY_EXISTS_PID);
             }
             patient.setPid(pid);
         }
@@ -150,11 +159,14 @@ public class PatientService {
         if (!Objects.equals(patient.getConsern(), consern)) {
             patient.setConsern(consern);
         }
+
+        log.info(BusinessLogMessage.Patient.PATIENT_UPDATED);
     }
 
     public Patient findPatientById(final Long id) {
+        log.error(BusinessLogMessage.Patient.PATIENT_NOT_FOUND);
         return patientRepository.findById(id).orElseThrow(() ->
-                new IllegalStateException("patient with this id" + id + " isn't found"));
+                new IllegalStateException(BusinessMessage.Patient.PATIENT_NOT_FOUND));
     }
 
 
